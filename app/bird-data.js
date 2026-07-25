@@ -144,6 +144,7 @@ window.BIRD_DATA = {
       "parentId": "novaeratitae",
       "summary": "Novaeratitae 内包含䳍形目的分支。",
       "traits": [
+        "恐鸟†与䳍构成的演化支",
         "䳍类保留飞行能力，与多支大型不会飞古颚鸟类形成对照"
       ],
       "referenceLabel": "Phillips et al., 2010",
@@ -164,6 +165,7 @@ window.BIRD_DATA = {
       "parentId": "novaeratitae",
       "summary": "包含鹬鸵目及其相关谱系的古颚类分支。",
       "traits": [
+        "象鸟与几维鸟构成的演化支",
         "现生代表为新西兰鹬鸵，体型小、夜行、嗅觉发达"
       ],
       "referenceLabel": "Mitchell et al., 2014",
