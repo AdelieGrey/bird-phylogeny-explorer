@@ -64,7 +64,7 @@ function readableSortBasis(value) {
 function readableSource(value) {
   if (!value || value === "Prototype data") return "本地整理资料";
   if (value === "Manual prototype phylogeny layer") {
-    return `万种鸟类基因组计划 Bird 10,000 Genomes Project - <span class="citation-popover" tabindex="0">B10K<span class="citation-note citation-note-wide" role="note">${b10kNote}</span></span>`;
+    return `万种鸟类基因组计划 Bird 10,000 Genomes Project - <span class="citation-popover" tabindex="0"><a href="https://b10k.genomics.cn" target="_blank" rel="noreferrer">B10K</a><span class="citation-note citation-note-wide" role="note">${b10kNote}</span></span>`;
   }
   if (value === "AviList v2025b; Chinese order names manually seeded") {
     return "AviList v2025b；中文目名来自本地整理";

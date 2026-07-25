@@ -483,6 +483,11 @@ button:hover {
   font-weight: 700;
 }
 
+.citation-popover a {
+  color: inherit;
+  text-decoration: none;
+}
+
 .citation-note {
   position: absolute;
   right: 0;
