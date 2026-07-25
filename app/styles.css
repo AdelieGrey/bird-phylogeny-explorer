@@ -256,7 +256,32 @@ button:hover {
 
 .tool-buttons {
   display: flex;
-  gap: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(63, 83, 74, 0.16);
+  border-radius: 999px;
+  background: rgba(255, 255, 249, 0.72);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.44);
+}
+
+.tool-buttons button {
+  height: 30px;
+  border: 0;
+  border-radius: 0;
+  padding: 0 12px;
+  color: #425148;
+  background: transparent;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.tool-buttons button + button {
+  border-left: 1px solid rgba(63, 83, 74, 0.13);
+}
+
+.tool-buttons button:hover,
+.tool-buttons button:focus-visible {
+  color: #17201c;
+  background: rgba(67, 198, 186, 0.12);
 }
 
 .tree {
@@ -555,7 +580,7 @@ button:hover {
   }
 
   .tool-buttons {
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: flex-end;
   }
 
