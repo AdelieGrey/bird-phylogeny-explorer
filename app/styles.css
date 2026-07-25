@@ -602,6 +602,15 @@ button:hover {
   color: var(--ink);
 }
 
+.source-list a {
+  color: #14776f;
+  text-decoration: none;
+}
+
+.source-list a:hover {
+  text-decoration: underline;
+}
+
 .source-status {
   margin-top: 12px;
   color: #8c9a90;

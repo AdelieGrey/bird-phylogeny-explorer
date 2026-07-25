@@ -355,7 +355,7 @@ function renderQuickList() {
 function renderSourceNote() {
   els.sourceNote.innerHTML = `
     <span class="source-list">
-      <span><strong>AviList v2025b</strong>：分类主干与目、科、属、种层级。</span>
+      <span><strong><a href="https://www.avilist.org" target="_blank" rel="noreferrer">AviList v2025b</a></strong>：分类主干与目、科、属、种层级。</span>
       <span><strong>中国观鸟年报名录 v12.0</strong>：中国鸟种名录、中文科名与中国分布优先对照。</span>
       <span><strong>birdMapV2</strong>：中文种名对照。</span>
       <span><strong>高层系统发育</strong>：万种鸟类基因组计划 Bird 10,000 Genomes Project - <span class="citation-popover" tabindex="0"><a href="https://b10k.genomics.cn" target="_blank" rel="noreferrer">B10K</a><span class="citation-note citation-note-wide" role="note">${b10kNote}</span></span>；排序参照 <span class="citation-popover" tabindex="0"><a href="https://www.nature.com/articles/s41586-024-07323-1" target="_blank" rel="noreferrer">Stiller et al. (2024)</a><span class="citation-note" role="note">${stillerCitation}</span></span>。</span>
