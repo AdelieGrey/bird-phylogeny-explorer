@@ -486,10 +486,10 @@ button:hover {
 .citation-note {
   position: absolute;
   right: 0;
-  top: calc(100% + 8px);
+  bottom: calc(100% + 8px);
   z-index: 20;
   display: none;
-  width: min(330px, 72vw);
+  width: min(240px, 56vw);
   border: 1px solid rgba(63, 83, 74, 0.18);
   border-radius: 8px;
   padding: 10px 12px;
@@ -504,7 +504,7 @@ button:hover {
 }
 
 .citation-note-wide {
-  width: min(360px, 62vw);
+  width: min(260px, 58vw);
 }
 
 .citation-popover:hover .citation-note,
