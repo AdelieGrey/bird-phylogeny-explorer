@@ -311,7 +311,11 @@ button:hover {
 }
 
 .node-row.in-lineage:not(.selected) {
-  background: rgba(244, 205, 83, 0.22);
+  border-left-color: #d4a62f;
+  border-left-width: 4px;
+  padding-left: 4px;
+  background: rgba(255, 253, 241, 0.72);
+  box-shadow: inset 0 0 0 1px rgba(212, 166, 47, 0.16);
 }
 
 .twisty {
