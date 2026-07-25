@@ -100,8 +100,8 @@ button:hover {
   --ink: #16211c;
   --muted: #5e6e66;
   --line: #c9d4ca;
-  --panel: #fffefa;
-  --panel-2: #fbf7ee;
+  --panel: #fffffd;
+  --panel-2: #fdfaf3;
   --accent-soft: rgba(56, 161, 148, 0.2);
   color: var(--ink);
   background:
