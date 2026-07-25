@@ -38,9 +38,28 @@ const stillerCitation =
 const b10kNote =
   "万种鸟类基因组计划（Bird 10,000 Genomes Project，简称 B10K）是一个由全球研究机构和博物馆共同参与的鸟类研究大型国际合作项目。该项目于2015年正式启动，计划通过收集鸟类样本、测序并组装基因组，逐步建立覆盖鸟类各目、科、属乃至所有物种的基因组数据库。截至目前，B10K 已发布数百种鸟类的基因组数据，覆盖绝大多数现生鸟类科，并利用这些数据构建了当前最全面的鸟类科级系统发育树。基于该项目的研究重新梳理了多个长期存在争议的类群关系，为后续的鸟类分类和比较基因组研究提供了基础，补充了鸟类早期快速辐射和主要演化分支的认识。";
 
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function scientificNameHtml(node, value = node.scientificName) {
+  const safeValue = escapeHtml(value);
+  return node.rank === "species" ? `<em>${safeValue}</em>` : safeValue;
+}
+
 function displayName(node) {
   const zh = node.chineseName ? `${node.chineseName} ` : "";
   return `${zh}${node.scientificName}`;
+}
+
+function displayNameHtml(node) {
+  const zh = node.chineseName ? `${escapeHtml(node.chineseName)} ` : "";
+  return `${zh}${scientificNameHtml(node)}`;
 }
 
 function subtitle(node) {
@@ -165,7 +184,7 @@ function renderResults() {
       button.type = "button";
       button.className = `result-item ${node.id === selectedId ? "active" : ""}`;
       button.innerHTML = `
-        <span class="result-name">${displayName(node)}</span>
+        <span class="result-name">${displayNameHtml(node)}</span>
         <span class="result-meta">${rankLabels[node.rank]} · ${subtitle(node)}</span>
       `;
       button.addEventListener("click", () => selectNode(node.id, true));
@@ -207,7 +226,7 @@ function renderTreeNode(id, lineageIds) {
   main.type = "button";
   main.className = "node-main";
   main.innerHTML = `
-    <span class="node-name">${displayName(node)}</span>
+    <span class="node-name">${displayNameHtml(node)}</span>
     <span class="node-sub">${subtitle(node)}</span>
   `;
   main.addEventListener("click", () => selectNode(id));
@@ -236,7 +255,7 @@ function renderTree() {
 
 function renderDetail() {
   const node = nodeById.get(selectedId);
-  els.treeTitle.textContent = displayName(node);
+  els.treeTitle.innerHTML = displayNameHtml(node);
   const traits = node.traits?.length
     ? `<ul class="trait-list">${node.traits.map((trait) => `<li>${trait}</li>`).join("")}</ul>`
     : "";
@@ -258,7 +277,7 @@ function renderDetail() {
   const chinaFacts = china
     ? `
       <div class="fact"><strong>中国名录</strong><span>${china.chineseName} · ${china.englishName}</span></div>
-      <div class="fact"><strong>名录学名</strong><span>${china.scientificNameOriginal}${china.scientificNameOriginal !== node.scientificName ? " → AviList: " + node.scientificName : ""}</span></div>
+      <div class="fact"><strong>名录学名</strong><span>${scientificNameHtml(node, china.scientificNameOriginal)}${china.scientificNameOriginal !== node.scientificName ? " → AviList: " + scientificNameHtml(node) : ""}</span></div>
       <div class="fact"><strong>保护等级</strong><span>${china.protection || "暂待补充"} · IUCN ${china.iucn || "暂待补充"}</span></div>
     `
     : "";
@@ -275,8 +294,8 @@ function renderDetail() {
   const decision = node.decisionSummary
     ? `<p class="summary"><strong>分类说明：</strong>${node.decisionSummary}</p>`
     : "";
-  const primaryTitle = node.chineseName || node.scientificName;
-  const latinLine = primaryTitle === node.scientificName ? "" : `<div class="latin">${node.scientificName}</div>`;
+  const primaryTitle = node.chineseName ? escapeHtml(node.chineseName) : scientificNameHtml(node);
+  const latinLine = node.chineseName ? `<div class="latin">${scientificNameHtml(node)}</div>` : "";
 
   els.detail.innerHTML = `
     <div class="detail-title">
@@ -316,7 +335,7 @@ function renderLineage() {
       const li = document.createElement("li");
       const button = document.createElement("button");
       button.type = "button";
-      button.textContent = `${node.chineseName ? `${node.chineseName} ` : ""}${node.scientificName} · ${node.rank}`;
+      button.innerHTML = `${displayNameHtml(node)} · ${rankLabels[node.rank] || node.rank}`;
       button.addEventListener("click", () => selectNode(node.id, true));
       li.append(button);
       return li;
