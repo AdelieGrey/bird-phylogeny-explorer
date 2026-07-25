@@ -1,0 +1,25 @@
+.DS_Store
+**/.DS_Store
+
+# Local Python dependencies and caches
+.local_py/
+__pycache__/
+*.py[cod]
+
+# Raw third-party datasets kept locally for rebuilding.
+data/raw/*
+!data/raw/README.md
+
+# Superseded manual draft tables. Keep the reviewed table tracked.
+data/processed/*filled.csv
+!data/processed/*final-reviewed.csv
+
+# Accidental duplicate raw files
+*.xls
+*.xlsx
+*.csv~
+
+# Local server/editor noise
+.vscode/
+.idea/
+*.log

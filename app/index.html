@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bird Phylogeny Explorer</title>
+    <link rel="icon" type="image/png" href="./assets/wagtail-icon.png" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <aside class="search-panel" aria-label="Search panel">
+        <div class="brand">
+          <img class="brand-logo" src="./assets/wagtail-logo.png" alt="白鹡鸰图标" />
+          <div>
+            <p class="kicker">Bird Phylogeny Explorer</p>
+            <h1>鸟类谱系速查器</h1>
+          </div>
+        </div>
+
+        <label class="search-box">
+          <span>搜索中文名 / English / Latin / 拼音</span>
+          <input id="searchInput" type="search" autocomplete="off" placeholder="试试：红喉北蜂鸟、Falco、Strisores" />
+        </label>
+
+        <div class="quick-list" id="quickList" aria-label="Quick searches"></div>
+
+        <div class="results-header">
+          <span id="resultCount">0 results</span>
+          <button id="clearSearch" class="ghost-button" type="button">清除</button>
+        </div>
+        <div class="results" id="results"></div>
+      </aside>
+
+      <section class="tree-panel" aria-label="Phylogeny tree">
+        <div class="toolbar">
+          <div>
+            <p class="kicker">Lineage</p>
+            <h2 id="treeTitle">Aves 鸟纲</h2>
+          </div>
+          <div class="tool-buttons">
+            <button id="collapseAll" type="button" title="Collapse all">收起</button>
+            <button id="expandPath" type="button" title="Expand selected lineage">展开路径</button>
+          </div>
+        </div>
+        <div class="tree" id="tree"></div>
+      </section>
+
+      <aside class="detail-panel" aria-label="Taxon details">
+        <section class="detail-block primary-detail" id="detail"></section>
+        <section class="detail-block">
+          <div class="section-head">
+            <p class="kicker">Lineage Path</p>
+            <h2>从高层到当前节点</h2>
+          </div>
+          <ol class="lineage-list" id="lineage"></ol>
+        </section>
+        <section class="detail-block">
+          <div class="section-head">
+            <p class="kicker">Lookalikes</p>
+            <h2>长得像但亲缘不近</h2>
+          </div>
+          <div class="comparison-list" id="comparisons"></div>
+        </section>
+        <section class="detail-block source-block">
+          <div class="section-head">
+            <p class="kicker">Dataset</p>
+            <h2>来源与状态</h2>
+          </div>
+          <p id="sourceNote"></p>
+        </section>
+      </aside>
+    </main>
+
+    <script src="./bird-data.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
