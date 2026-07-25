@@ -230,7 +230,7 @@ CLADES = [
         "chineseName": "",
         "parentId": "novaeratitae",
         "summary": "包含鹬鸵目及其相关谱系的古颚类分支。",
-        "traits": ["象鸟†与几维鸟构成的演化支", "现生代表为新西兰鹬鸵，体型小、夜行、嗅觉发达"],
+        "traits": ["象鸟†与几维鸟构成的演化支", "现生代表为新西兰几维鸟，体型小、夜行、嗅觉发达"],
         "referenceLabel": "Mitchell et al., 2014",
         "referenceUrl": "https://doi.org/10.1126/science.1251981",
     },
