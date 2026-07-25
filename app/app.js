@@ -32,6 +32,9 @@ const rankLabels = {
   species: "species",
 };
 
+const stillerCitation =
+  "Stiller, J., Feng, S., Chowdhury, AA. et al. Complexity of avian evolution revealed by family-level genomes. Nature 629, 851–860 (2024). https://doi.org/10.1038/s41586-024-07323-1";
+
 function displayName(node) {
   const zh = node.chineseName ? `${node.chineseName} ` : "";
   return `${zh}${node.scientificName}`;
@@ -45,7 +48,9 @@ function subtitle(node) {
 
 function readableSortBasis(value) {
   if (!value) return "";
-  if (value === "Manual prototype clade order") return "按高层系统发育关系排列";
+  if (value === "Manual prototype clade order") {
+    return `参照 <span class="citation-popover" tabindex="0">Stiller et al. (2024)<span class="citation-note" role="note">${stillerCitation}</span></span> 中系统发育树排序`;
+  }
   if (value === "AviList Sequence") return "按 AviList 目级顺序排列";
   if (value === "AviList Sequence family row") return "按 AviList 科级顺序排列";
   if (value === "AviList Sequence genus row") return "按 AviList 属级顺序排列";
@@ -55,9 +60,7 @@ function readableSortBasis(value) {
 
 function readableSource(value) {
   if (!value || value === "Prototype data") return "本地整理资料";
-  if (value === "Manual prototype phylogeny layer") {
-    return "Stiller, J., Feng, S., Chowdhury, AA. et al. Complexity of avian evolution revealed by family-level genomes. Nature 629, 851–860 (2024). https://doi.org/10.1038/s41586-024-07323-1";
-  }
+  if (value === "Manual prototype phylogeny layer") return "手动整理的高层系统发育框架";
   if (value === "AviList v2025b; Chinese order names manually seeded") {
     return "AviList v2025b；中文目名来自本地整理";
   }

@@ -18,10 +18,6 @@ CLEMENTS_PATH = RAW_DIR / "eBird-Clements_v2025-integrated-checklist-October-202
 AVILIST_PATH = RAW_DIR / "AviList-v2025b-10Jun2026-extended.xlsx"
 CHINESE_PATH = RAW_DIR / "birdMapV2.js"
 CHINA_CHECKLIST_PATH = RAW_DIR / "中国观鸟年报-中国鸟类名录_v12.0.xls"
-CITATION_STILLER_2024 = (
-    "Stiller, J., Feng, S., Chowdhury, AA. et al. Complexity of avian evolution revealed by "
-    "family-level genomes. Nature 629, 851–860 (2024). https://doi.org/10.1038/s41586-024-07323-1"
-)
 
 
 ORDER_ZH = {
@@ -931,7 +927,7 @@ def main():
                 **clade,
                 "sortOrder": CLADE_SORT.get(clade["id"], 999),
                 "sortBasis": "Manual prototype clade order",
-                "source": CITATION_STILLER_2024,
+                "source": "Manual prototype phylogeny layer",
             }
         )
 

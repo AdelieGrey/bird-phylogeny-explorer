@@ -469,6 +469,40 @@ button:hover {
   color: var(--ink);
 }
 
+.citation-popover {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  border-bottom: 1px dotted rgba(20, 119, 111, 0.58);
+  color: #14776f;
+  cursor: help;
+  font-weight: 700;
+}
+
+.citation-note {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 8px);
+  z-index: 4;
+  display: none;
+  width: min(330px, 72vw);
+  border: 1px solid rgba(63, 83, 74, 0.18);
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: #23312b;
+  background: #fffdf3;
+  box-shadow: 0 12px 28px rgba(28, 38, 33, 0.18);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.citation-popover:hover .citation-note,
+.citation-popover:focus .citation-note,
+.citation-popover:focus-within .citation-note {
+  display: block;
+}
+
 .trait-list {
   display: grid;
   gap: 8px;
