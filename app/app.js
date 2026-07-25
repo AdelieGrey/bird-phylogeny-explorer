@@ -67,7 +67,7 @@ function readableSource(value) {
     return `万种鸟类基因组计划 Bird 10,000 Genomes Project - <span class="citation-popover" tabindex="0"><a href="https://b10k.genomics.cn" target="_blank" rel="noreferrer">B10K</a><span class="citation-note citation-note-wide" role="note">${b10kNote}</span></span>`;
   }
   if (value === "AviList v2025b; Chinese order names manually seeded") {
-    return "AviList v2025b；中文目名来自本地整理";
+    return "AviList v2025b；中文名称对照懂鸟小程序";
   }
   if (value === "AviList v2025b family record; Chinese family name from CBR v12.0 when matched") {
     return "AviList v2025b；中文科名优先参考中国观鸟年报名录";
