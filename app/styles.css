@@ -536,7 +536,7 @@ button:hover {
 .lineage-list {
   display: grid;
   gap: 7px;
-  margin: 0;
+  margin: 12px 0 0;
   padding-left: 20px;
 }
 
