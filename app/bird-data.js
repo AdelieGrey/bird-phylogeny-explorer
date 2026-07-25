@@ -81,8 +81,8 @@ window.BIRD_DATA = {
       "parentId": "neornithes",
       "summary": "包括鸵鸟与 Notopalaeognathae 两大方向，是现代鸟类早期分化出的主要分支之一。",
       "traits": [
-        "多数大型陆栖或飞行能力弱",
-        "包含不会飞的平胸鸟和会飞的䳍类"
+        "多为大型陆栖鸟类，除䳍形目外全部无飞行能力。",
+        "飞行能力多次独立演化丧失"
       ],
       "sortOrder": 10,
       "sortBasis": "Manual prototype clade order",
@@ -103,6 +103,8 @@ window.BIRD_DATA = {
       "traits": [
         "连接美洲鸵、䳍类、鹤鸵、鸸鹋和鹬鸵等南方古颚鸟类谱系"
       ],
+      "referenceLabel": "Harshman et al., 2008",
+      "referenceUrl": "https://doi.org/10.1073/pnas.0803242105",
       "sortOrder": 11,
       "sortBasis": "Manual prototype clade order",
       "source": "Manual prototype phylogeny layer",
@@ -122,6 +124,8 @@ window.BIRD_DATA = {
       "traits": [
         "包含会飞的䳍类与多支不会飞的平胸鸟谱系"
       ],
+      "referenceLabel": "Yonezawa et al., 2017",
+      "referenceUrl": "https://doi.org/10.1016/j.cub.2016.10.029",
       "sortOrder": 12,
       "sortBasis": "Manual prototype clade order",
       "source": "Manual prototype phylogeny layer",
@@ -142,6 +146,8 @@ window.BIRD_DATA = {
       "traits": [
         "䳍类保留飞行能力，与多支大型不会飞古颚鸟类形成对照"
       ],
+      "referenceLabel": "Phillips et al., 2010",
+      "referenceUrl": "https://doi.org/10.1093/sysbio/syp079",
       "sortOrder": 13,
       "sortBasis": "Manual prototype clade order",
       "source": "Manual prototype phylogeny layer",
@@ -160,6 +166,8 @@ window.BIRD_DATA = {
       "traits": [
         "现生代表为新西兰鹬鸵，体型小、夜行、嗅觉发达"
       ],
+      "referenceLabel": "Mitchell et al., 2014",
+      "referenceUrl": "https://doi.org/10.1126/science.1251981",
       "sortOrder": 15,
       "sortBasis": "Manual prototype clade order",
       "source": "Manual prototype phylogeny layer",

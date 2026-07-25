@@ -184,7 +184,7 @@ CLADES = [
         "chineseName": "古颚类",
         "parentId": "neornithes",
         "summary": "包括鸵鸟与 Notopalaeognathae 两大方向，是现代鸟类早期分化出的主要分支之一。",
-        "traits": ["多数大型陆栖或飞行能力弱", "包含不会飞的平胸鸟和会飞的䳍类"],
+        "traits": ["多为大型陆栖鸟类，除䳍形目外全部无飞行能力。", "飞行能力多次独立演化丧失"],
     },
     {
         "id": "notopalaeognathae",
@@ -195,6 +195,8 @@ CLADES = [
         "parentId": "palaeognathae",
         "summary": "古颚类中除鸵鸟目之外的主要分支，包含美洲鸵目与 Novaeratitae。",
         "traits": ["连接美洲鸵、䳍类、鹤鸵、鸸鹋和鹬鸵等南方古颚鸟类谱系"],
+        "referenceLabel": "Harshman et al., 2008",
+        "referenceUrl": "https://doi.org/10.1073/pnas.0803242105",
     },
     {
         "id": "novaeratitae",
@@ -205,6 +207,8 @@ CLADES = [
         "parentId": "notopalaeognathae",
         "summary": "Notopalaeognathae 内除美洲鸵目之外的分支，包含䳍类、鹤鸵和鹬鸵方向。",
         "traits": ["包含会飞的䳍类与多支不会飞的平胸鸟谱系"],
+        "referenceLabel": "Yonezawa et al., 2017",
+        "referenceUrl": "https://doi.org/10.1016/j.cub.2016.10.029",
     },
     {
         "id": "dinocrypturi",
@@ -215,6 +219,8 @@ CLADES = [
         "parentId": "novaeratitae",
         "summary": "Novaeratitae 内包含䳍形目的分支。",
         "traits": ["䳍类保留飞行能力，与多支大型不会飞古颚鸟类形成对照"],
+        "referenceLabel": "Phillips et al., 2010",
+        "referenceUrl": "https://doi.org/10.1093/sysbio/syp079",
     },
     {
         "id": "aepyornithomorphae",
@@ -225,6 +231,8 @@ CLADES = [
         "parentId": "novaeratitae",
         "summary": "包含鹬鸵目及其相关谱系的古颚类分支。",
         "traits": ["现生代表为新西兰鹬鸵，体型小、夜行、嗅觉发达"],
+        "referenceLabel": "Mitchell et al., 2014",
+        "referenceUrl": "https://doi.org/10.1126/science.1251981",
     },
     {
         "id": "neognathae",

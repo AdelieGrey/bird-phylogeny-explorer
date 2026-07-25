@@ -49,7 +49,14 @@ function subtitle(node) {
   return node.rank;
 }
 
-function readableSortBasis(value) {
+function referenceLink(node) {
+  if (!node.referenceLabel || !node.referenceUrl) return "";
+  return `<a href="${node.referenceUrl}" target="_blank" rel="noreferrer">${node.referenceLabel}</a>`;
+}
+
+function readableSortBasis(value, node) {
+  const nodeReference = referenceLink(node);
+  if (nodeReference) return nodeReference;
   if (!value) return "";
   if (value === "Manual prototype clade order") {
     return `参照 <span class="citation-popover" tabindex="0"><a href="https://www.nature.com/articles/s41586-024-07323-1" target="_blank" rel="noreferrer">Stiller et al. (2024)</a><span class="citation-note" role="note">${stillerCitation}</span></span> 中系统发育树排序`;
@@ -61,7 +68,9 @@ function readableSortBasis(value) {
   return value;
 }
 
-function readableSource(value) {
+function readableSource(value, node = {}) {
+  const nodeReference = referenceLink(node);
+  if (nodeReference) return nodeReference;
   if (!value || value === "Prototype data") return "本地整理资料";
   if (value === "Manual prototype phylogeny layer") {
     return `万种鸟类基因组计划 Bird 10,000 Genomes Project - <span class="citation-popover" tabindex="0"><a href="https://b10k.genomics.cn" target="_blank" rel="noreferrer">B10K</a><span class="citation-note citation-note-wide" role="note">${b10kNote}</span></span>`;
@@ -239,7 +248,7 @@ function renderDetail() {
     : "";
   const code = node.ebirdCode ? `<div class="fact"><strong>eBird code</strong><span>${node.ebirdCode}</span></div>` : "";
   const pinyin = node.pinyin ? `<div class="fact"><strong>拼音</strong><span>${node.pinyin}</span></div>` : "";
-  const sortBasis = node.sortBasis ? `<div class="fact"><strong>排序</strong><span>${readableSortBasis(node.sortBasis)}</span></div>` : "";
+  const sortBasis = node.sortBasis ? `<div class="fact"><strong>排序</strong><span>${readableSortBasis(node.sortBasis, node)}</span></div>` : "";
   const iucn = node.iucn ? `<div class="fact"><strong>IUCN</strong><span>${node.iucn}</span></div>` : "";
   const regionTags = node.regionTags?.length
     ? `<div class="fact"><strong>区域</strong><span>${node.regionTags.join("、")}</span></div>`
@@ -292,7 +301,7 @@ function renderDetail() {
       ${pinyin}
       ${sortBasis}
       ${linkFact}
-      <div class="fact"><strong>资料来源</strong><span>${readableSource(node.source)}</span></div>
+      <div class="fact"><strong>资料来源</strong><span>${readableSource(node.source, node)}</span></div>
     </div>
     ${chinaNote}
     ${decision}
