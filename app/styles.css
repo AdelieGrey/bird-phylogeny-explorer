@@ -420,6 +420,12 @@ button:hover {
   line-height: 1.58;
 }
 
+.summary-empty {
+  color: #8c9a90;
+  font-size: 13px;
+  font-style: italic;
+}
+
 .facts {
   display: grid;
   gap: 8px;

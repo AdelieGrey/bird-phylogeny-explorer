@@ -4,7 +4,7 @@ const nodeById = new Map(nodes.map((node) => [node.id, node]));
 const childrenById = new Map(nodes.map((node) => [node.id, node.childrenIds || []]));
 
 let selectedId = "aves";
-let expanded = new Set(["aves", "neognathae", "neoaves", "strisores", "telluraves"]);
+let expanded = new Set(["aves", "neornithes", "neognathae", "neoaves", "strisores", "telluraves"]);
 
 const els = {
   search: document.querySelector("#searchInput"),
@@ -24,6 +24,7 @@ const els = {
 
 const rankLabels = {
   class: "class",
+  subclass: "subclass",
   clade: "clade",
   order: "order",
   family: "family",
@@ -236,7 +237,7 @@ function renderDetail() {
       </div>
       <span class="rank-pill">${node.rank}</span>
     </div>
-    <p class="summary">${node.summary || "这个节点目前来自 Clements 骨架，中文名/类群画像可在后续版本继续补全。"}</p>
+    ${node.summary ? `<p class="summary">${node.summary}</p>` : `<p class="summary summary-empty">这里空空的，搬运工冰鹡鸰还没有跑到这里～</p>`}
     <div class="facts">
       <div class="fact"><strong>英文</strong><span>${node.englishName || "待补"}</span></div>
       <div class="fact"><strong>中文</strong><span>${node.chineseName || "待补 / needs review"}</span></div>

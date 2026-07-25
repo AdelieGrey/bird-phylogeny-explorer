@@ -6,7 +6,7 @@ window.BIRD_DATA = {
     "clementsFile": "eBird-Clements_v2025-integrated-checklist-October-2025.csv",
     "avilistFile": "AviList-v2025b-10Jun2026-extended.xlsx",
     "avilistRows": 33684,
-    "includedNodes": 13824,
+    "includedNodes": 13825,
     "includedOrders": 46,
     "includedFamilies": 252,
     "includedFamiliesWithChinese": 120,
@@ -49,6 +49,25 @@ window.BIRD_DATA = {
       "sortBasis": "Manual prototype clade order",
       "source": "Manual prototype phylogeny layer",
       "childrenIds": [
+        "neornithes"
+      ]
+    },
+    {
+      "id": "neornithes",
+      "rank": "subclass",
+      "scientificName": "Neornithes",
+      "englishName": "Modern birds",
+      "chineseName": "今鸟亚纲",
+      "parentId": "aves",
+      "summary": "现生鸟类及其近缘灭绝成员所在的冠群，向下分为古颚类与今颚类。",
+      "traits": [
+        "现代鸟类主要谱系的共同起点",
+        "包含古颚类与今颚类两大分支"
+      ],
+      "sortOrder": 5,
+      "sortBasis": "Manual prototype clade order",
+      "source": "Manual prototype phylogeny layer",
+      "childrenIds": [
         "palaeognathae",
         "neognathae"
       ]
@@ -59,7 +78,7 @@ window.BIRD_DATA = {
       "scientificName": "Palaeognathae",
       "englishName": "Palaeognaths",
       "chineseName": "古颚类",
-      "parentId": "aves",
+      "parentId": "neornithes",
       "summary": "包括鸵鸟、鸸鹋、鹤鸵、几维、䳍等，是现代鸟类早期分化出的主要分支之一。",
       "traits": [
         "多数大型陆栖或飞行能力弱",
@@ -82,7 +101,7 @@ window.BIRD_DATA = {
       "scientificName": "Neognathae",
       "englishName": "Neognaths",
       "chineseName": "今颚类",
-      "parentId": "aves",
+      "parentId": "neornithes",
       "summary": "除古颚类之外的现代鸟类大分支，包含鸡雁小纲与新鸟类。",
       "traits": [
         "现代鸟类绝大多数多样性所在",
@@ -123,7 +142,7 @@ window.BIRD_DATA = {
       "englishName": "Neoaves",
       "chineseName": "新鸟类",
       "parentId": "neognathae",
-      "summary": "现代鸟类最大辐射分支之一。内部早期分化关系仍有研究更新，本原型先作为学习导航层。",
+      "summary": "现代鸟类最大辐射分支之一，包含除古颚类和鸡雁小纲之外的大多数现生鸟类。",
       "traits": [
         "包含绝大多数现代鸟类目",
         "多个深部分支在短时间内快速辐射"
@@ -146,7 +165,7 @@ window.BIRD_DATA = {
       "englishName": "Nightbirds, swifts, and hummingbirds",
       "chineseName": "夜鸟类",
       "parentId": "strisores_phaethoquornithes",
-      "summary": "包括油鸱、林鸱、蟆口鸱、裸鼻鸱、夜鹰、雨燕和蜂鸟等。它不是传统固定阶元，但是真实的系统发育演化支。",
+      "summary": "包括油鸱、林鸱、蟆口鸱、裸鼻鸱、夜鹰、雨燕和蜂鸟等。",
       "traits": [
         "包含夜行、暮行、高速飞行和花蜜取食等多种特化",
         "蜂鸟的悬停飞行与雨燕的高速飞行都落在这个大分支内"
@@ -253,7 +272,7 @@ window.BIRD_DATA = {
       "englishName": "Elementaves",
       "chineseName": "元素鸟类",
       "parentId": "neoaves",
-      "summary": "在本原型的高层谱系层中分为两支：Gruae，以及夜鸟类与鹭形类共同组成的暂名支。",
+      "summary": "近年在万种鸟类基因组计划中被最新描述的一大类群。下属分支包括 Gruae，以及夜鸟类与鹭形类所在的姐妹支。",
       "traits": [
         "把麝雉目、鹤形总目、夜鸟类、日鳽目、鹲形目与核心水鸟类放入同一大框架中"
       ],
@@ -311,9 +330,9 @@ window.BIRD_DATA = {
       "englishName": "Nightbirds and Phaethoquornithes",
       "chineseName": "夜鸟类-鹭形类支",
       "parentId": "elementaves",
-      "summary": "元素鸟类内部尚未命名的一支；本原型暂用组成类群命名，包含夜鸟类与鹭形类。",
+      "summary": "元素鸟类内部由夜鸟类与鹭形类组成的一支，目前可先按这两个组成类群来理解。",
       "traits": [
-        "这是一个临时展示名称，等确定正式中文或拉丁名称后可以替换"
+        "连接夜鸟类与日鳽、鹲类及核心水鸟类所在分支"
       ],
       "sortOrder": 160,
       "sortBasis": "Manual prototype clade order",
