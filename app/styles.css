@@ -497,6 +497,10 @@ button:hover {
   line-height: 1.5;
 }
 
+.citation-note-wide {
+  width: min(430px, 76vw);
+}
+
 .citation-popover:hover .citation-note,
 .citation-popover:focus .citation-note,
 .citation-popover:focus-within .citation-note {

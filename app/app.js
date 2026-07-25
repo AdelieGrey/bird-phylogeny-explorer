@@ -35,6 +35,9 @@ const rankLabels = {
 const stillerCitation =
   "Stiller, J., Feng, S., Chowdhury, AA. et al. Complexity of avian evolution revealed by family-level genomes. Nature 629, 851–860 (2024). https://doi.org/10.1038/s41586-024-07323-1";
 
+const b10kNote =
+  "万种鸟类基因组计划（Bird 10,000 Genomes Project，简称 B10K）是一个由全球研究机构和博物馆共同参与的鸟类研究大型国际合作项目。该项目于2015年正式启动，计划通过收集鸟类样本、测序并组装基因组，逐步建立覆盖鸟类各目、科、属乃至所有物种的基因组数据库。截至目前，B10K 已发布数百种鸟类的基因组数据，覆盖绝大多数现生鸟类科，并利用这些数据构建了当前最全面的鸟类科级系统发育树。基于该项目的研究重新梳理了多个长期存在争议的类群关系，为后续的鸟类分类和比较基因组研究提供了基础，补充了鸟类早期快速辐射和主要演化分支的认识。";
+
 function displayName(node) {
   const zh = node.chineseName ? `${node.chineseName} ` : "";
   return `${zh}${node.scientificName}`;
@@ -60,7 +63,9 @@ function readableSortBasis(value) {
 
 function readableSource(value) {
   if (!value || value === "Prototype data") return "本地整理资料";
-  if (value === "Manual prototype phylogeny layer") return "手动整理的高层系统发育框架";
+  if (value === "Manual prototype phylogeny layer") {
+    return `万种鸟类基因组计划 Bird 10,000 Genomes Project - <span class="citation-popover" tabindex="0">B10K<span class="citation-note citation-note-wide" role="note">${b10kNote}</span></span>`;
+  }
   if (value === "AviList v2025b; Chinese order names manually seeded") {
     return "AviList v2025b；中文目名来自本地整理";
   }
