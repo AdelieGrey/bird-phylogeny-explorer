@@ -379687,6 +379687,13 @@ window.BIRD_DATA = {
       "title": "隼形目 vs 鹰形目",
       "leftId": "order_falconiformes",
       "rightId": "order_accipitriformes",
+      "contextIds": [
+        "telluraves",
+        "australaves",
+        "afroaves",
+        "order_falconiformes",
+        "order_accipitriformes"
+      ],
       "summary": "两者都有钩喙、利爪和强视觉捕猎，但隼形目在陆鸟类中更接近鹦鹉与雀形鸟方向；鹰形目属于另一支日行猛禽谱系。",
       "shared": [
         "日行捕猎生态位",
@@ -379699,6 +379706,13 @@ window.BIRD_DATA = {
       "title": "蜂鸟 vs 太阳鸟",
       "leftId": "family_trochilidae",
       "rightId": "family_nectariniidae",
+      "contextIds": [
+        "strisores",
+        "order_apodiformes",
+        "family_trochilidae",
+        "order_passeriformes",
+        "family_nectariniidae"
+      ],
       "summary": "两者都与花蜜取食、长喙和艳丽羽色相关，但蜂鸟在夜鸟类/雨燕目内，太阳鸟是雀形目。",
       "shared": [
         "花蜜取食",
@@ -379711,6 +379725,13 @@ window.BIRD_DATA = {
       "title": "雨燕 vs 燕子",
       "leftId": "family_apodidae",
       "rightId": "family_hirundinidae",
+      "contextIds": [
+        "strisores",
+        "order_apodiformes",
+        "family_apodidae",
+        "order_passeriformes",
+        "family_hirundinidae"
+      ],
       "summary": "雨燕和燕子都在空中捕虫，外形近似，但雨燕与蜂鸟同属雨燕目，燕子属于雀形目。",
       "shared": [
         "空中捕虫",
@@ -379723,6 +379744,16 @@ window.BIRD_DATA = {
       "title": "企鹅 vs 海雀",
       "leftId": "family_spheniscidae",
       "rightId": "family_alcidae",
+      "contextIds": [
+        "elementaves",
+        "phaethoquornithes",
+        "aequornithes",
+        "order_sphenisciformes",
+        "family_spheniscidae",
+        "cursorimorphae",
+        "order_charadriiformes",
+        "family_alcidae"
+      ],
       "summary": "企鹅和海雀都是黑白海鸟并擅长潜水，但企鹅属于企鹅目，海雀属于鸻形目。",
       "shared": [
         "海洋生活",
@@ -379735,6 +379766,12 @@ window.BIRD_DATA = {
       "title": "鸮形目 vs 日行猛禽",
       "leftId": "order_strigiformes",
       "rightId": "order_accipitriformes",
+      "contextIds": [
+        "telluraves",
+        "afroaves",
+        "order_strigiformes",
+        "order_accipitriformes"
+      ],
       "summary": "猫头鹰和鹰雕都占据猛禽生态位，但猫头鹰是夜行捕猎谱系，鹰雕是日行猛禽谱系。",
       "shared": [
         "钩喙",

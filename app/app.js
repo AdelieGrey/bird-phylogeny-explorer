@@ -16,6 +16,7 @@ const els = {
   treeTitle: document.querySelector("#treeTitle"),
   detail: document.querySelector("#detail"),
   lineage: document.querySelector("#lineage"),
+  comparisonBlock: document.querySelector("#comparisonBlock"),
   comparisons: document.querySelector("#comparisons"),
   sourceNote: document.querySelector("#sourceNote"),
   collapseAll: document.querySelector("#collapseAll"),
@@ -276,12 +277,13 @@ function renderLineage() {
 
 function renderComparisons() {
   const selectedPath = new Set(lineageOf(selectedId).map((node) => node.id));
-  const relevant = data.comparisons.filter(
-    (card) => selectedPath.has(card.leftId) || selectedPath.has(card.rightId) || card.leftId === selectedId || card.rightId === selectedId,
-  );
-  const cards = (relevant.length ? relevant : data.comparisons).slice(0, 5);
+  const relevant = data.comparisons.filter((card) => {
+    const contextIds = card.contextIds || [card.leftId, card.rightId];
+    return selectedPath.has(card.leftId) || selectedPath.has(card.rightId) || contextIds.includes(selectedId);
+  });
+  els.comparisonBlock.hidden = relevant.length === 0;
   els.comparisons.replaceChildren(
-    ...cards.map((card) => {
+    ...relevant.slice(0, 5).map((card) => {
       const div = document.createElement("article");
       div.className = "comparison-card";
       div.innerHTML = `
