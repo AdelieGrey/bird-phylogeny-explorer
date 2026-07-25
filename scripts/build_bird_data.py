@@ -252,7 +252,7 @@ CLADES = [
         "chineseName": "鸨鹃类",
         "parentId": "neoaves",
         "summary": "将鸨、蕉鹃和鹃类放在一个较高层级的演化支中。",
-        "traits": ["外形差异很大，适合展示系统发育与直觉形态分类的差别"],
+        "traits": ["鸨、蕉鹃和鹃类外形差异很大，体现深部亲缘关系与直觉形态分类的差别"],
     },
     {
         "id": "elementaves",
@@ -262,7 +262,7 @@ CLADES = [
         "chineseName": "元素鸟类",
         "parentId": "neoaves",
         "summary": "近年在万种鸟类基因组计划中被最新描述的一大类群。下属分支包括 Gruae，以及夜鸟类与鹭形类所在的姐妹支。",
-        "traits": ["把麝雉目、鹤形总目、夜鸟类、日鳽目、鹲形目与核心水鸟类放入同一大框架中"],
+        "traits": ["包含麝雉目、鹤形总目、夜鸟类、日鳽目、鹲形目与核心水鸟类等差异很大的分支"],
     },
     {
         "id": "gruae",
@@ -272,7 +272,7 @@ CLADES = [
         "chineseName": "Gruae",
         "parentId": "elementaves",
         "summary": "元素鸟类内部的一支，包含麝雉目 Opisthocomiformes 与鹤形总目 Cursorimorphae。",
-        "traits": ["在展示层中把麝雉与鹤形目、鸻形目所在分支并列连接"],
+        "traits": ["包含麝雉目，以及鹤形目与鸻形目共同组成的鹤形总目"],
     },
     {
         "id": "cursorimorphae",
@@ -312,7 +312,7 @@ CLADES = [
         "chineseName": "日鳽总目",
         "parentId": "phaethoquornithes",
         "summary": "包含日鳽目 Eurypygiformes 与鹲形目 Phaethontiformes 的演化支。",
-        "traits": ["日鳽与鹲类外形和生态差异明显，但在这里作为相邻谱系展示"],
+        "traits": ["日鳽与鹲类外形和生态差异明显，但构成相邻的水鸟相关谱系"],
     },
     {
         "id": "afroaves",
@@ -417,7 +417,7 @@ NODE_NOTES = {
     "Aegothelidae": {
         "chineseName": "裸鼻鸱科",
         "summary": "裸鼻鸱是夜鸟类中较小而隐蔽的分支，多分布于澳新区域。",
-        "traits": ["夜行", "树洞利用", "联系夜鹰与雨燕蜂鸟方向的学习节点"],
+        "traits": ["夜行", "树洞利用", "位于夜鸟类内部接近雨燕蜂鸟方向的分支"],
     },
     "Falconidae": {
         "chineseName": "隼科",
@@ -461,7 +461,7 @@ NODE_NOTES = {
     },
     "Passeriformes": {
         "summary": "雀形目是现代鸟类最大目，包含鸣禽和亚鸣禽等重要分支。",
-        "traits": ["鸣唱、树栖和小型化多样性极高", "oscines 起源与澳大拉西亚相关，是后续演化历史模块的重点"],
+        "traits": ["鸣唱、树栖和小型化多样性极高", "鸣禽（oscines）起源与澳大拉西亚相关，是雀形目演化历史中的重要线索"],
     },
 }
 
