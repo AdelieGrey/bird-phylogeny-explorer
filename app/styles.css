@@ -588,6 +588,26 @@ button:hover {
   line-height: 1.5;
 }
 
+.source-list {
+  display: grid;
+  gap: 8px;
+}
+
+.source-list span,
+.source-status {
+  display: block;
+}
+
+.source-list strong {
+  color: var(--ink);
+}
+
+.source-status {
+  margin-top: 12px;
+  color: #8c9a90;
+  font-size: 12px;
+}
+
 .empty-state {
   padding: 18px;
   color: var(--muted);
