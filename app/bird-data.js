@@ -252,7 +252,7 @@ window.BIRD_DATA = {
       "englishName": "Bustards, turacos, and cuckoos",
       "chineseName": "鸨鹃类",
       "parentId": "neoaves",
-      "summary": "将鸨、蕉鹃和鹃类放在一个较高层级的演化支中。",
+      "summary": "鸨、蕉鹃和鹃类共同构成新鸟类中的一个深部分支，三者外形和生态差异很大。",
       "traits": [
         "鸨、蕉鹃和鹃类外形差异很大，体现深部亲缘关系与直觉形态分类的差别"
       ],
