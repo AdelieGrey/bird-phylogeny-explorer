@@ -535,9 +535,10 @@ button:hover {
 }
 
 .trait-list li {
+  border: 1px solid rgba(226, 185, 93, 0.18);
   border-left: 3px solid var(--gold);
   padding: 7px 10px;
-  background: rgba(255, 253, 241, 0.76);
+  background: #fff7dd;
   line-height: 1.45;
 }
 
