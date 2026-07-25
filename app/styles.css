@@ -73,6 +73,8 @@ button:hover {
 }
 
 .tree-panel {
+  position: relative;
+  z-index: 1;
   padding: 24px;
   --ink: #16211c;
   --muted: #5e6e66;
@@ -91,6 +93,8 @@ button:hover {
 }
 
 .detail-panel {
+  position: relative;
+  z-index: 3;
   border-left: 1px solid var(--line);
   padding: 24px 18px;
   --ink: #16211c;
@@ -481,9 +485,9 @@ button:hover {
 
 .citation-note {
   position: absolute;
-  right: 0;
-  bottom: calc(100% + 8px);
-  z-index: 4;
+  left: 0;
+  top: calc(100% + 8px);
+  z-index: 20;
   display: none;
   width: min(330px, 72vw);
   border: 1px solid rgba(63, 83, 74, 0.18);
@@ -495,10 +499,12 @@ button:hover {
   font-size: 12px;
   font-weight: 500;
   line-height: 1.5;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .citation-note-wide {
-  width: min(430px, 76vw);
+  width: min(360px, 62vw);
 }
 
 .citation-popover:hover .citation-note,
