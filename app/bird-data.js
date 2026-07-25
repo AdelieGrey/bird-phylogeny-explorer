@@ -274,7 +274,7 @@ window.BIRD_DATA = {
       "parentId": "neoaves",
       "summary": "近年在万种鸟类基因组计划中被最新描述的一大类群。下属分支包括 Gruae，以及夜鸟类与鹭形类所在的姐妹支。",
       "traits": [
-        "包含麝雉目、鹤形总目、夜鸟类、日鳽目、鹲形目与核心水鸟类等差异很大的分支"
+        "下属谱系横跨陆栖、岸滩、水域、海洋飞行与夜行/高速飞行等多种生态方向"
       ],
       "sortOrder": 150,
       "sortBasis": "Manual prototype clade order",
