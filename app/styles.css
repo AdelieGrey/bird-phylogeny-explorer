@@ -593,7 +593,7 @@ button:hover {
   gap: 8px;
 }
 
-.source-list span,
+.source-list > span,
 .source-status {
   display: block;
 }
