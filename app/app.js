@@ -43,6 +43,34 @@ function subtitle(node) {
   return node.rank;
 }
 
+function readableSortBasis(value) {
+  if (!value) return "";
+  if (value === "Manual prototype clade order") return "按高层系统发育关系排列";
+  if (value === "AviList Sequence") return "按 AviList 目级顺序排列";
+  if (value === "AviList Sequence family row") return "按 AviList 科级顺序排列";
+  if (value === "AviList Sequence genus row") return "按 AviList 属级顺序排列";
+  if (value === "AviList Sequence species row") return "按 AviList 物种顺序排列";
+  return value;
+}
+
+function readableSource(value) {
+  if (!value || value === "Prototype data") return "本地整理资料";
+  if (value === "Manual prototype phylogeny layer") return "手动整理的高层系统发育框架";
+  if (value === "AviList v2025b; Chinese order names manually seeded") {
+    return "AviList v2025b；中文目名来自本地整理";
+  }
+  if (value === "AviList v2025b family record; Chinese family name from CBR v12.0 when matched") {
+    return "AviList v2025b；中文科名优先参考中国观鸟年报名录";
+  }
+  if (value === "AviList v2025b genus record; Chinese genus name from local override when matched") {
+    return "AviList v2025b；中文属名来自本地校订表";
+  }
+  if (value === "AviList v2025b species record; Chinese name from birdMapV2.js when matched") {
+    return "AviList v2025b；中文种名来自 birdMapV2 对照";
+  }
+  return value;
+}
+
 function searchableText(node) {
   return [
     node.chineseName,
@@ -201,7 +229,7 @@ function renderDetail() {
     : "";
   const code = node.ebirdCode ? `<div class="fact"><strong>eBird code</strong><span>${node.ebirdCode}</span></div>` : "";
   const pinyin = node.pinyin ? `<div class="fact"><strong>拼音</strong><span>${node.pinyin}</span></div>` : "";
-  const sortBasis = node.sortBasis ? `<div class="fact"><strong>排序</strong><span>${node.sortBasis}</span></div>` : "";
+  const sortBasis = node.sortBasis ? `<div class="fact"><strong>排列</strong><span>${readableSortBasis(node.sortBasis)}</span></div>` : "";
   const iucn = node.iucn ? `<div class="fact"><strong>IUCN</strong><span>${node.iucn}</span></div>` : "";
   const regionTags = node.regionTags?.length
     ? `<div class="fact"><strong>区域</strong><span>${node.regionTags.join("、")}</span></div>`
@@ -252,7 +280,7 @@ function renderDetail() {
       ${pinyin}
       ${sortBasis}
       ${linkFact}
-      <div class="fact"><strong>来源</strong><span>${node.source || "Prototype data"}</span></div>
+      <div class="fact"><strong>资料来源</strong><span>${readableSource(node.source)}</span></div>
     </div>
     ${chinaNote}
     ${decision}
