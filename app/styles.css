@@ -564,6 +564,7 @@ button:hover {
 .comparison-list {
   display: grid;
   gap: 10px;
+  margin-top: 12px;
 }
 
 .comparison-card {
