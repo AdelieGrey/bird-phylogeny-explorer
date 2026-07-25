@@ -1097,8 +1097,8 @@ def main():
             "chinaChecklistUnmatchedRows": len([r for r in china_match_report if r["status"] in {"unmatched", "ambiguous_english_name"}]),
             "sources": [
                 "AviList Core Team. 2026. AviList: The Global Avian Checklist, v2025b. https://doi.org/10.2173/avilist.v2025b",
-                "中国观鸟年报-中国鸟类名录 12.0 (2024), used for China checklist tags and Chinese species names; AviList taxonomy prevails when concepts differ.",
-                "birdMapV2.js by wzy0421, used as prototype Chinese species-name mapping.",
+                "中国观鸟年报-中国鸟类名录 12.0 (2024), used for China checklist tags; AviList taxonomy prevails when concepts differ.",
+                "郑光美《中国鸟类分类与物种名录》第四版, used as Chinese species-name reference.",
                 "Clements/eBird v2025 names retained where AviList provides perfect-match Clements names.",
                 "Prum et al. 2015, Nature, doi:10.1038/nature15697.",
                 "Stiller et al. 2024, Nature, doi:10.1038/s41586-024-07323-1.",
