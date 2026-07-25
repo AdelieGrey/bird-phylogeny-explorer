@@ -25,7 +25,7 @@ ORDER_ZH = {
     "Aegotheliformes": "裸鼻鸱目",
     "Anseriformes": "雁形目",
     "Apodiformes": "雨燕目",
-    "Apterygiformes": "几维目",
+    "Apterygiformes": "鹬鸵目",
     "Bucerotiformes": "犀鸟目",
     "Caprimulgiformes": "夜鹰目",
     "Cariamiformes": "叫鹤目",
@@ -72,10 +72,10 @@ ORDER_ZH = {
 
 ORDER_PARENT = {
     "Struthioniformes": "palaeognathae",
-    "Rheiformes": "palaeognathae",
-    "Casuariiformes": "palaeognathae",
-    "Apterygiformes": "palaeognathae",
-    "Tinamiformes": "palaeognathae",
+    "Rheiformes": "notopalaeognathae",
+    "Casuariiformes": "novaeratitae",
+    "Apterygiformes": "aepyornithomorphae",
+    "Tinamiformes": "dinocrypturi",
     "Galliformes": "galloanserae",
     "Anseriformes": "galloanserae",
     "Steatornithiformes": "strisores",
@@ -123,6 +123,10 @@ CLADE_SORT = {
     "aves": 0,
     "neornithes": 5,
     "palaeognathae": 10,
+    "notopalaeognathae": 11,
+    "novaeratitae": 12,
+    "dinocrypturi": 13,
+    "aepyornithomorphae": 15,
     "neognathae": 20,
     "galloanserae": 30,
     "neoaves": 40,
@@ -140,6 +144,14 @@ CLADE_SORT = {
     "telluraves": 200,
     "afroaves": 210,
     "australaves": 220,
+}
+
+MANUAL_CHILDREN_ORDER = {
+    "palaeognathae": ["order_struthioniformes", "notopalaeognathae"],
+    "notopalaeognathae": ["order_rheiformes", "novaeratitae"],
+    "novaeratitae": ["dinocrypturi", "order_casuariiformes", "aepyornithomorphae"],
+    "dinocrypturi": ["order_tinamiformes"],
+    "aepyornithomorphae": ["order_apterygiformes"],
 }
 
 
@@ -171,8 +183,48 @@ CLADES = [
         "englishName": "Palaeognaths",
         "chineseName": "古颚类",
         "parentId": "neornithes",
-        "summary": "包括鸵鸟、鸸鹋、鹤鸵、几维、䳍等，是现代鸟类早期分化出的主要分支之一。",
+        "summary": "包括鸵鸟与 Notopalaeognathae 两大方向，是现代鸟类早期分化出的主要分支之一。",
         "traits": ["多数大型陆栖或飞行能力弱", "包含不会飞的平胸鸟和会飞的䳍类"],
+    },
+    {
+        "id": "notopalaeognathae",
+        "rank": "clade",
+        "scientificName": "Notopalaeognathae",
+        "englishName": "Southern palaeognaths",
+        "chineseName": "Notopalaeognathae",
+        "parentId": "palaeognathae",
+        "summary": "古颚类中除鸵鸟目之外的主要分支，包含美洲鸵目与 Novaeratitae。",
+        "traits": ["连接美洲鸵、䳍类、鹤鸵、鸸鹋和鹬鸵等南方古颚鸟类谱系"],
+    },
+    {
+        "id": "novaeratitae",
+        "rank": "clade",
+        "scientificName": "Novaeratitae",
+        "englishName": "Novaeratitae",
+        "chineseName": "Novaeratitae",
+        "parentId": "notopalaeognathae",
+        "summary": "Notopalaeognathae 内除美洲鸵目之外的分支，包含䳍类、鹤鸵和鹬鸵方向。",
+        "traits": ["包含会飞的䳍类与多支不会飞的平胸鸟谱系"],
+    },
+    {
+        "id": "dinocrypturi",
+        "rank": "clade",
+        "scientificName": "Dinocrypturi",
+        "englishName": "Dinocrypturi",
+        "chineseName": "Dinocrypturi",
+        "parentId": "novaeratitae",
+        "summary": "Novaeratitae 内包含䳍形目的分支。",
+        "traits": ["䳍类保留飞行能力，与多支大型不会飞古颚鸟类形成对照"],
+    },
+    {
+        "id": "aepyornithomorphae",
+        "rank": "clade",
+        "scientificName": "Aepyornithomorphae",
+        "englishName": "Elephant birds and kiwis",
+        "chineseName": "Aepyornithomorphae",
+        "parentId": "novaeratitae",
+        "summary": "包含鹬鸵目及其相关谱系的古颚类分支。",
+        "traits": ["现生代表为新西兰鹬鸵，体型小、夜行、嗅觉发达"],
     },
     {
         "id": "neognathae",
@@ -1063,7 +1115,7 @@ def main():
 
     rank_order = {"class": 0, "subclass": 1, "clade": 2, "order": 3, "family": 4, "species": 5}
     for node in nodes:
-        node["childrenIds"] = sorted(
+        sorted_children = sorted(
             children.get(node["id"], []),
             key=lambda cid: (
                 rank_order.get(node_by_id[cid]["rank"], 9),
@@ -1071,6 +1123,12 @@ def main():
                 node_by_id[cid]["scientificName"],
             ),
         )
+        if node["id"] in MANUAL_CHILDREN_ORDER:
+            manual_children = MANUAL_CHILDREN_ORDER[node["id"]]
+            node["childrenIds"] = [cid for cid in manual_children if cid in sorted_children]
+            node["childrenIds"].extend(cid for cid in sorted_children if cid not in manual_children)
+        else:
+            node["childrenIds"] = sorted_children
 
     data = {
         "meta": {

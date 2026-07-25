@@ -6,7 +6,7 @@ window.BIRD_DATA = {
     "clementsFile": "eBird-Clements_v2025-integrated-checklist-October-2025.csv",
     "avilistFile": "AviList-v2025b-10Jun2026-extended.xlsx",
     "avilistRows": 33684,
-    "includedNodes": 13825,
+    "includedNodes": 13829,
     "includedOrders": 46,
     "includedFamilies": 252,
     "includedFamiliesWithChinese": 120,
@@ -79,7 +79,7 @@ window.BIRD_DATA = {
       "englishName": "Palaeognaths",
       "chineseName": "古颚类",
       "parentId": "neornithes",
-      "summary": "包括鸵鸟、鸸鹋、鹤鸵、几维、䳍等，是现代鸟类早期分化出的主要分支之一。",
+      "summary": "包括鸵鸟与 Notopalaeognathae 两大方向，是现代鸟类早期分化出的主要分支之一。",
       "traits": [
         "多数大型陆栖或飞行能力弱",
         "包含不会飞的平胸鸟和会飞的䳍类"
@@ -89,10 +89,82 @@ window.BIRD_DATA = {
       "source": "Manual prototype phylogeny layer",
       "childrenIds": [
         "order_struthioniformes",
-        "order_casuariiformes",
-        "order_apterygiformes",
+        "notopalaeognathae"
+      ]
+    },
+    {
+      "id": "notopalaeognathae",
+      "rank": "clade",
+      "scientificName": "Notopalaeognathae",
+      "englishName": "Southern palaeognaths",
+      "chineseName": "Notopalaeognathae",
+      "parentId": "palaeognathae",
+      "summary": "古颚类中除鸵鸟目之外的主要分支，包含美洲鸵目与 Novaeratitae。",
+      "traits": [
+        "连接美洲鸵、䳍类、鹤鸵、鸸鹋和鹬鸵等南方古颚鸟类谱系"
+      ],
+      "sortOrder": 11,
+      "sortBasis": "Manual prototype clade order",
+      "source": "Manual prototype phylogeny layer",
+      "childrenIds": [
         "order_rheiformes",
+        "novaeratitae"
+      ]
+    },
+    {
+      "id": "novaeratitae",
+      "rank": "clade",
+      "scientificName": "Novaeratitae",
+      "englishName": "Novaeratitae",
+      "chineseName": "Novaeratitae",
+      "parentId": "notopalaeognathae",
+      "summary": "Notopalaeognathae 内除美洲鸵目之外的分支，包含䳍类、鹤鸵和鹬鸵方向。",
+      "traits": [
+        "包含会飞的䳍类与多支不会飞的平胸鸟谱系"
+      ],
+      "sortOrder": 12,
+      "sortBasis": "Manual prototype clade order",
+      "source": "Manual prototype phylogeny layer",
+      "childrenIds": [
+        "dinocrypturi",
+        "order_casuariiformes",
+        "aepyornithomorphae"
+      ]
+    },
+    {
+      "id": "dinocrypturi",
+      "rank": "clade",
+      "scientificName": "Dinocrypturi",
+      "englishName": "Dinocrypturi",
+      "chineseName": "Dinocrypturi",
+      "parentId": "novaeratitae",
+      "summary": "Novaeratitae 内包含䳍形目的分支。",
+      "traits": [
+        "䳍类保留飞行能力，与多支大型不会飞古颚鸟类形成对照"
+      ],
+      "sortOrder": 13,
+      "sortBasis": "Manual prototype clade order",
+      "source": "Manual prototype phylogeny layer",
+      "childrenIds": [
         "order_tinamiformes"
+      ]
+    },
+    {
+      "id": "aepyornithomorphae",
+      "rank": "clade",
+      "scientificName": "Aepyornithomorphae",
+      "englishName": "Elephant birds and kiwis",
+      "chineseName": "Aepyornithomorphae",
+      "parentId": "novaeratitae",
+      "summary": "包含鹬鸵目及其相关谱系的古颚类分支。",
+      "traits": [
+        "现生代表为新西兰鹬鸵，体型小、夜行、嗅觉发达"
+      ],
+      "sortOrder": 15,
+      "sortBasis": "Manual prototype clade order",
+      "source": "Manual prototype phylogeny layer",
+      "childrenIds": [
+        "order_apterygiformes"
       ]
     },
     {
@@ -470,7 +542,7 @@ window.BIRD_DATA = {
       "scientificName": "Casuariiformes",
       "englishName": "Casuariiformes",
       "chineseName": "鹤鸵目",
-      "parentId": "palaeognathae",
+      "parentId": "novaeratitae",
       "summary": "",
       "traits": [],
       "sortOrder": 10.0,
@@ -485,8 +557,8 @@ window.BIRD_DATA = {
       "rank": "order",
       "scientificName": "Apterygiformes",
       "englishName": "Apterygiformes",
-      "chineseName": "几维目",
-      "parentId": "palaeognathae",
+      "chineseName": "鹬鸵目",
+      "parentId": "aepyornithomorphae",
       "summary": "",
       "traits": [],
       "sortOrder": 24.0,
@@ -502,7 +574,7 @@ window.BIRD_DATA = {
       "scientificName": "Rheiformes",
       "englishName": "Rheiformes",
       "chineseName": "美洲鸵目",
-      "parentId": "palaeognathae",
+      "parentId": "notopalaeognathae",
       "summary": "",
       "traits": [],
       "sortOrder": 34.0,
@@ -518,7 +590,7 @@ window.BIRD_DATA = {
       "scientificName": "Tinamiformes",
       "englishName": "Tinamiformes",
       "chineseName": "䳍形目",
-      "parentId": "palaeognathae",
+      "parentId": "dinocrypturi",
       "summary": "",
       "traits": [],
       "sortOrder": 47.0,
