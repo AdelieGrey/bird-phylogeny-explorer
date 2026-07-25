@@ -139,6 +139,13 @@ button:hover {
   font-size: 28px;
 }
 
+.byline {
+  margin: 5px 0 0;
+  color: #6f8178;
+  font-size: 12px;
+  font-weight: 650;
+}
+
 .kicker {
   margin: 0 0 6px;
   color: var(--accent);
