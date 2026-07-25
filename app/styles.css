@@ -591,6 +591,10 @@ button:hover {
   color: var(--muted);
 }
 
+.source-block .kicker {
+  color: #14776f;
+}
+
 #sourceNote {
   margin: 12px 0 0;
   color: var(--muted);
