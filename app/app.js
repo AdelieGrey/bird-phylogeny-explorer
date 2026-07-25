@@ -55,7 +55,9 @@ function readableSortBasis(value) {
 
 function readableSource(value) {
   if (!value || value === "Prototype data") return "本地整理资料";
-  if (value === "Manual prototype phylogeny layer") return "手动整理的高层系统发育框架";
+  if (value === "Manual prototype phylogeny layer") {
+    return "Stiller, J., Feng, S., Chowdhury, AA. et al. Complexity of avian evolution revealed by family-level genomes. Nature 629, 851–860 (2024). https://doi.org/10.1038/s41586-024-07323-1";
+  }
   if (value === "AviList v2025b; Chinese order names manually seeded") {
     return "AviList v2025b；中文目名来自本地整理";
   }
@@ -229,7 +231,7 @@ function renderDetail() {
     : "";
   const code = node.ebirdCode ? `<div class="fact"><strong>eBird code</strong><span>${node.ebirdCode}</span></div>` : "";
   const pinyin = node.pinyin ? `<div class="fact"><strong>拼音</strong><span>${node.pinyin}</span></div>` : "";
-  const sortBasis = node.sortBasis ? `<div class="fact"><strong>排列</strong><span>${readableSortBasis(node.sortBasis)}</span></div>` : "";
+  const sortBasis = node.sortBasis ? `<div class="fact"><strong>排序</strong><span>${readableSortBasis(node.sortBasis)}</span></div>` : "";
   const iucn = node.iucn ? `<div class="fact"><strong>IUCN</strong><span>${node.iucn}</span></div>` : "";
   const regionTags = node.regionTags?.length
     ? `<div class="fact"><strong>区域</strong><span>${node.regionTags.join("、")}</span></div>`

@@ -47,7 +47,7 @@ window.BIRD_DATA = {
       ],
       "sortOrder": 0,
       "sortBasis": "Manual prototype clade order",
-      "source": "Manual prototype phylogeny layer",
+      "source": "Stiller, J., Feng, S., Chowdhury, AA. et al. Complexity of avian evolution revealed by family-level genomes. Nature 629, 851–860 (2024). https://doi.org/10.1038/s41586-024-07323-1",
       "childrenIds": [
         "neornithes"
       ]
@@ -66,7 +66,7 @@ window.BIRD_DATA = {
       ],
       "sortOrder": 5,
       "sortBasis": "Manual prototype clade order",
-      "source": "Manual prototype phylogeny layer",
+      "source": "Stiller, J., Feng, S., Chowdhury, AA. et al. Complexity of avian evolution revealed by family-level genomes. Nature 629, 851–860 (2024). https://doi.org/10.1038/s41586-024-07323-1",
       "childrenIds": [
         "palaeognathae",
         "neognathae"
@@ -86,7 +86,7 @@ window.BIRD_DATA = {
       ],
       "sortOrder": 10,
       "sortBasis": "Manual prototype clade order",
-      "source": "Manual prototype phylogeny layer",
+      "source": "Stiller, J., Feng, S., Chowdhury, AA. et al. Complexity of avian evolution revealed by family-level genomes. Nature 629, 851–860 (2024). https://doi.org/10.1038/s41586-024-07323-1",
       "childrenIds": [
         "order_struthioniformes",
         "order_casuariiformes",
@@ -109,7 +109,7 @@ window.BIRD_DATA = {
       ],
       "sortOrder": 20,
       "sortBasis": "Manual prototype clade order",
-      "source": "Manual prototype phylogeny layer",
+      "source": "Stiller, J., Feng, S., Chowdhury, AA. et al. Complexity of avian evolution revealed by family-level genomes. Nature 629, 851–860 (2024). https://doi.org/10.1038/s41586-024-07323-1",
       "childrenIds": [
         "galloanserae",
         "neoaves"
@@ -129,7 +129,7 @@ window.BIRD_DATA = {
       ],
       "sortOrder": 30,
       "sortBasis": "Manual prototype clade order",
-      "source": "Manual prototype phylogeny layer",
+      "source": "Stiller, J., Feng, S., Chowdhury, AA. et al. Complexity of avian evolution revealed by family-level genomes. Nature 629, 851–860 (2024). https://doi.org/10.1038/s41586-024-07323-1",
       "childrenIds": [
         "order_anseriformes",
         "order_galliformes"
@@ -149,7 +149,7 @@ window.BIRD_DATA = {
       ],
       "sortOrder": 40,
       "sortBasis": "Manual prototype clade order",
-      "source": "Manual prototype phylogeny layer",
+      "source": "Stiller, J., Feng, S., Chowdhury, AA. et al. Complexity of avian evolution revealed by family-level genomes. Nature 629, 851–860 (2024). https://doi.org/10.1038/s41586-024-07323-1",
       "childrenIds": [
         "columbaves",
         "otidimorphae",
@@ -172,7 +172,7 @@ window.BIRD_DATA = {
       ],
       "sortOrder": 100,
       "sortBasis": "Manual prototype clade order",
-      "source": "Manual prototype phylogeny layer",
+      "source": "Stiller, J., Feng, S., Chowdhury, AA. et al. Complexity of avian evolution revealed by family-level genomes. Nature 629, 851–860 (2024). https://doi.org/10.1038/s41586-024-07323-1",
       "childrenIds": [
         "order_caprimulgiformes",
         "order_steatornithiformes",
@@ -196,7 +196,7 @@ window.BIRD_DATA = {
       ],
       "sortOrder": 170,
       "sortBasis": "Manual prototype clade order",
-      "source": "Manual prototype phylogeny layer",
+      "source": "Stiller, J., Feng, S., Chowdhury, AA. et al. Complexity of avian evolution revealed by family-level genomes. Nature 629, 851–860 (2024). https://doi.org/10.1038/s41586-024-07323-1",
       "childrenIds": [
         "order_gaviiformes",
         "order_sphenisciformes",
@@ -219,7 +219,7 @@ window.BIRD_DATA = {
       ],
       "sortOrder": 140,
       "sortBasis": "Manual prototype clade order",
-      "source": "Manual prototype phylogeny layer",
+      "source": "Stiller, J., Feng, S., Chowdhury, AA. et al. Complexity of avian evolution revealed by family-level genomes. Nature 629, 851–860 (2024). https://doi.org/10.1038/s41586-024-07323-1",
       "childrenIds": [
         "order_phoenicopteriformes",
         "order_podicipediformes"
@@ -238,7 +238,7 @@ window.BIRD_DATA = {
       ],
       "sortOrder": 120,
       "sortBasis": "Manual prototype clade order",
-      "source": "Manual prototype phylogeny layer",
+      "source": "Stiller, J., Feng, S., Chowdhury, AA. et al. Complexity of avian evolution revealed by family-level genomes. Nature 629, 851–860 (2024). https://doi.org/10.1038/s41586-024-07323-1",
       "childrenIds": [
         "order_mesitornithiformes",
         "order_pterocliformes",
@@ -258,7 +258,7 @@ window.BIRD_DATA = {
       ],
       "sortOrder": 130,
       "sortBasis": "Manual prototype clade order",
-      "source": "Manual prototype phylogeny layer",
+      "source": "Stiller, J., Feng, S., Chowdhury, AA. et al. Complexity of avian evolution revealed by family-level genomes. Nature 629, 851–860 (2024). https://doi.org/10.1038/s41586-024-07323-1",
       "childrenIds": [
         "order_musophagiformes",
         "order_otidiformes",
@@ -278,7 +278,7 @@ window.BIRD_DATA = {
       ],
       "sortOrder": 150,
       "sortBasis": "Manual prototype clade order",
-      "source": "Manual prototype phylogeny layer",
+      "source": "Stiller, J., Feng, S., Chowdhury, AA. et al. Complexity of avian evolution revealed by family-level genomes. Nature 629, 851–860 (2024). https://doi.org/10.1038/s41586-024-07323-1",
       "childrenIds": [
         "gruae",
         "strisores_phaethoquornithes"
@@ -297,7 +297,7 @@ window.BIRD_DATA = {
       ],
       "sortOrder": 151,
       "sortBasis": "Manual prototype clade order",
-      "source": "Manual prototype phylogeny layer",
+      "source": "Stiller, J., Feng, S., Chowdhury, AA. et al. Complexity of avian evolution revealed by family-level genomes. Nature 629, 851–860 (2024). https://doi.org/10.1038/s41586-024-07323-1",
       "childrenIds": [
         "cursorimorphae",
         "order_opisthocomiformes"
@@ -317,7 +317,7 @@ window.BIRD_DATA = {
       ],
       "sortOrder": 152,
       "sortBasis": "Manual prototype clade order",
-      "source": "Manual prototype phylogeny layer",
+      "source": "Stiller, J., Feng, S., Chowdhury, AA. et al. Complexity of avian evolution revealed by family-level genomes. Nature 629, 851–860 (2024). https://doi.org/10.1038/s41586-024-07323-1",
       "childrenIds": [
         "order_gruiformes",
         "order_charadriiformes"
@@ -336,7 +336,7 @@ window.BIRD_DATA = {
       ],
       "sortOrder": 160,
       "sortBasis": "Manual prototype clade order",
-      "source": "Manual prototype phylogeny layer",
+      "source": "Stiller, J., Feng, S., Chowdhury, AA. et al. Complexity of avian evolution revealed by family-level genomes. Nature 629, 851–860 (2024). https://doi.org/10.1038/s41586-024-07323-1",
       "childrenIds": [
         "strisores",
         "phaethoquornithes"
@@ -355,7 +355,7 @@ window.BIRD_DATA = {
       ],
       "sortOrder": 161,
       "sortBasis": "Manual prototype clade order",
-      "source": "Manual prototype phylogeny layer",
+      "source": "Stiller, J., Feng, S., Chowdhury, AA. et al. Complexity of avian evolution revealed by family-level genomes. Nature 629, 851–860 (2024). https://doi.org/10.1038/s41586-024-07323-1",
       "childrenIds": [
         "phaethontimorphae",
         "aequornithes"
@@ -374,7 +374,7 @@ window.BIRD_DATA = {
       ],
       "sortOrder": 162,
       "sortBasis": "Manual prototype clade order",
-      "source": "Manual prototype phylogeny layer",
+      "source": "Stiller, J., Feng, S., Chowdhury, AA. et al. Complexity of avian evolution revealed by family-level genomes. Nature 629, 851–860 (2024). https://doi.org/10.1038/s41586-024-07323-1",
       "childrenIds": [
         "order_eurypygiformes",
         "order_phaethontiformes"
@@ -393,7 +393,7 @@ window.BIRD_DATA = {
       ],
       "sortOrder": 210,
       "sortBasis": "Manual prototype clade order",
-      "source": "Manual prototype phylogeny layer",
+      "source": "Stiller, J., Feng, S., Chowdhury, AA. et al. Complexity of avian evolution revealed by family-level genomes. Nature 629, 851–860 (2024). https://doi.org/10.1038/s41586-024-07323-1",
       "childrenIds": [
         "order_strigiformes",
         "order_cathartiformes",
@@ -420,7 +420,7 @@ window.BIRD_DATA = {
       ],
       "sortOrder": 220,
       "sortBasis": "Manual prototype clade order",
-      "source": "Manual prototype phylogeny layer",
+      "source": "Stiller, J., Feng, S., Chowdhury, AA. et al. Complexity of avian evolution revealed by family-level genomes. Nature 629, 851–860 (2024). https://doi.org/10.1038/s41586-024-07323-1",
       "childrenIds": [
         "order_cariamiformes",
         "order_falconiformes",
@@ -442,7 +442,7 @@ window.BIRD_DATA = {
       ],
       "sortOrder": 200,
       "sortBasis": "Manual prototype clade order",
-      "source": "Manual prototype phylogeny layer",
+      "source": "Stiller, J., Feng, S., Chowdhury, AA. et al. Complexity of avian evolution revealed by family-level genomes. Nature 629, 851–860 (2024). https://doi.org/10.1038/s41586-024-07323-1",
       "childrenIds": [
         "afroaves",
         "australaves"
