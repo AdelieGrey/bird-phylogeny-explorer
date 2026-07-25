@@ -502,7 +502,7 @@ button:hover {
   bottom: calc(100% + 8px);
   z-index: 20;
   display: none;
-  width: min(240px, 56vw);
+  width: min(200px, calc(100vw - 32px));
   border: 1px solid rgba(63, 83, 74, 0.18);
   border-radius: 8px;
   padding: 10px 12px;
@@ -517,7 +517,7 @@ button:hover {
 }
 
 .citation-note-wide {
-  width: min(260px, 58vw);
+  width: min(200px, calc(100vw - 32px));
 }
 
 .citation-popover:hover .citation-note,
