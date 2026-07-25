@@ -4,7 +4,7 @@ const nodeById = new Map(nodes.map((node) => [node.id, node]));
 const childrenById = new Map(nodes.map((node) => [node.id, node.childrenIds || []]));
 
 let selectedId = "aves";
-let expanded = new Set(["aves", "neornithes", "neognathae", "neoaves", "strisores", "telluraves"]);
+let expanded = new Set(["aves", "neornithes"]);
 
 const els = {
   search: document.querySelector("#searchInput"),
@@ -400,4 +400,4 @@ els.expandPath.addEventListener("click", () => {
 });
 
 renderQuickList();
-selectNode("strisores");
+selectNode("aves");
