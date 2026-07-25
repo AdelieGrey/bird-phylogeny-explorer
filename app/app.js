@@ -52,7 +52,7 @@ function subtitle(node) {
 function readableSortBasis(value) {
   if (!value) return "";
   if (value === "Manual prototype clade order") {
-    return `参照 <span class="citation-popover" tabindex="0">Stiller et al. (2024)<span class="citation-note" role="note">${stillerCitation}</span></span> 中系统发育树排序`;
+    return `参照 <span class="citation-popover" tabindex="0"><a href="https://www.nature.com/articles/s41586-024-07323-1" target="_blank" rel="noreferrer">Stiller et al. (2024)</a><span class="citation-note" role="note">${stillerCitation}</span></span> 中系统发育树排序`;
   }
   if (value === "AviList Sequence") return "按 AviList 目级顺序排列";
   if (value === "AviList Sequence family row") return "按 AviList 科级顺序排列";
