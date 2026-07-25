@@ -276,8 +276,7 @@ function renderDetail() {
   const derivedGenus = node.chinaGenusNameCandidate;
   const chinaFacts = china
     ? `
-      <div class="fact"><strong>中国名录</strong><span>${china.chineseName} · ${china.englishName}</span></div>
-      <div class="fact"><strong>名录学名</strong><span>${scientificNameHtml(node, china.scientificNameOriginal)}${china.scientificNameOriginal !== node.scientificName ? " → AviList: " + scientificNameHtml(node) : ""}</span></div>
+      <div class="fact"><strong>中国观鸟名录</strong><span>${china.chineseName} · ${china.englishName}</span></div>
       <div class="fact"><strong>保护等级</strong><span>${china.protection || "暂待补充"} · IUCN ${china.iucn || "暂待补充"}</span></div>
     `
     : "";
@@ -309,7 +308,7 @@ function renderDetail() {
     ${node.summary ? `<p class="summary">${node.summary}</p>` : `<p class="summary summary-empty">这里空空的，搬运工冰鹡鸰还没有跑到这里～</p>`}
     <div class="facts">
       <div class="fact"><strong>英文</strong><span>${node.englishName || "暂待补充"}</span></div>
-      <div class="fact"><strong>中文</strong><span>${node.chineseName || "暂待补充"}</span></div>
+      <div class="fact"><strong>中文正式名</strong><span>${node.chineseName || "暂待补充"}</span></div>
       ${names}
       ${count}
       ${range}
