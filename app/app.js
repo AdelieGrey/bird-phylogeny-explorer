@@ -266,13 +266,15 @@ function renderDetail() {
   const decision = node.decisionSummary
     ? `<p class="summary"><strong>分类说明：</strong>${node.decisionSummary}</p>`
     : "";
+  const primaryTitle = node.chineseName || node.scientificName;
+  const latinLine = primaryTitle === node.scientificName ? "" : `<div class="latin">${node.scientificName}</div>`;
 
   els.detail.innerHTML = `
     <div class="detail-title">
       <div>
         <p class="kicker">${rankLabels[node.rank] || node.rank}</p>
-        <h2>${node.chineseName || node.englishName || node.scientificName}</h2>
-        <div class="latin">${node.scientificName}</div>
+        <h2>${primaryTitle}</h2>
+        ${latinLine}
       </div>
       <span class="rank-pill">${node.rank}</span>
     </div>

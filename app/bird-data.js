@@ -97,7 +97,7 @@ window.BIRD_DATA = {
       "rank": "clade",
       "scientificName": "Notopalaeognathae",
       "englishName": "Southern palaeognaths",
-      "chineseName": "Notopalaeognathae",
+      "chineseName": "",
       "parentId": "palaeognathae",
       "summary": "古颚类中除鸵鸟目之外的主要分支，包含美洲鸵目与 Novaeratitae。",
       "traits": [
@@ -116,7 +116,7 @@ window.BIRD_DATA = {
       "rank": "clade",
       "scientificName": "Novaeratitae",
       "englishName": "Novaeratitae",
-      "chineseName": "Novaeratitae",
+      "chineseName": "",
       "parentId": "notopalaeognathae",
       "summary": "Notopalaeognathae 内除美洲鸵目之外的分支，包含䳍类、鹤鸵和鹬鸵方向。",
       "traits": [
@@ -136,7 +136,7 @@ window.BIRD_DATA = {
       "rank": "clade",
       "scientificName": "Dinocrypturi",
       "englishName": "Dinocrypturi",
-      "chineseName": "Dinocrypturi",
+      "chineseName": "",
       "parentId": "novaeratitae",
       "summary": "Novaeratitae 内包含䳍形目的分支。",
       "traits": [
@@ -154,7 +154,7 @@ window.BIRD_DATA = {
       "rank": "clade",
       "scientificName": "Aepyornithomorphae",
       "englishName": "Elephant birds and kiwis",
-      "chineseName": "Aepyornithomorphae",
+      "chineseName": "",
       "parentId": "novaeratitae",
       "summary": "包含鹬鸵目及其相关谱系的古颚类分支。",
       "traits": [
@@ -361,7 +361,7 @@ window.BIRD_DATA = {
       "rank": "clade",
       "scientificName": "Gruae",
       "englishName": "Hoatzin, cranes, and shorebirds",
-      "chineseName": "Gruae",
+      "chineseName": "",
       "parentId": "elementaves",
       "summary": "元素鸟类内部的一支，包含麝雉目 Opisthocomiformes 与鹤形总目 Cursorimorphae。",
       "traits": [
