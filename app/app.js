@@ -156,6 +156,10 @@ function focusTreeOnLineage(id) {
   }
 }
 
+function showFocusedSiblingsAt(id) {
+  focusedChildByParent.delete(id);
+}
+
 function selectNode(id, scroll = false, options = {}) {
   selectedId = id;
   expandLineage(id);
@@ -239,7 +243,7 @@ function renderTreeNode(id, lineageIds) {
   twisty.addEventListener("click", (event) => {
     event.stopPropagation();
     if (hasHiddenFocusedSiblings) {
-      clearFocusedTree();
+      showFocusedSiblingsAt(id);
       expanded.add(id);
       renderTree();
       return;
