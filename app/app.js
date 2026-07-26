@@ -5,6 +5,8 @@ const childrenById = new Map(nodes.map((node) => [node.id, node.childrenIds || [
 
 let selectedId = "aves";
 let expanded = new Set(["aves", "neornithes"]);
+let focusedPathIds = new Set();
+let focusedChildByParent = new Map();
 
 const els = {
   search: document.querySelector("#searchInput"),
@@ -140,9 +142,25 @@ function expandLineage(id) {
   for (const node of lineageOf(id)) expanded.add(node.id);
 }
 
-function selectNode(id, scroll = false) {
+function clearFocusedTree() {
+  focusedPathIds = new Set();
+  focusedChildByParent = new Map();
+}
+
+function focusTreeOnLineage(id) {
+  const path = lineageOf(id);
+  focusedPathIds = new Set(path.map((node) => node.id));
+  focusedChildByParent = new Map();
+  for (let index = 0; index < path.length - 1; index += 1) {
+    focusedChildByParent.set(path[index].id, path[index + 1].id);
+  }
+}
+
+function selectNode(id, scroll = false, options = {}) {
   selectedId = id;
   expandLineage(id);
+  if (options.focusLineage) focusTreeOnLineage(id);
+  else clearFocusedTree();
   renderAll();
   if (scroll) {
     const row = document.querySelector(`[data-node-id="${id}"]`);
@@ -187,7 +205,7 @@ function renderResults() {
         <span class="result-name">${displayNameHtml(node)}</span>
         <span class="result-meta">${rankLabels[node.rank]} · ${subtitle(node)}</span>
       `;
-      button.addEventListener("click", () => selectNode(node.id, true));
+      button.addEventListener("click", () => selectNode(node.id, true, { focusLineage: node.rank === "species" }));
       return button;
     }),
   );
@@ -196,6 +214,9 @@ function renderResults() {
 function renderTreeNode(id, lineageIds) {
   const node = nodeById.get(id);
   const childIds = childrenById.get(id) || [];
+  const focusedChildId = focusedChildByParent.get(id);
+  const visibleChildIds = focusedChildId ? childIds.filter((childId) => childId === focusedChildId) : childIds;
+  const hasHiddenFocusedSiblings = Boolean(focusedChildId && visibleChildIds.length < childIds.length);
   const hasChildren = childIds.length > 0;
   const isOpen = expanded.has(id);
   const li = document.createElement("li");
@@ -214,9 +235,16 @@ function renderTreeNode(id, lineageIds) {
   twisty.type = "button";
   twisty.className = `twisty ${hasChildren ? "" : "empty"}`;
   twisty.textContent = isOpen ? "−" : "+";
-  twisty.title = isOpen ? "Collapse" : "Expand";
+  twisty.title = hasHiddenFocusedSiblings ? "Show sibling branches" : isOpen ? "Collapse" : "Expand";
   twisty.addEventListener("click", (event) => {
     event.stopPropagation();
+    if (hasHiddenFocusedSiblings) {
+      clearFocusedTree();
+      expanded.add(id);
+      renderTree();
+      return;
+    }
+    clearFocusedTree();
     if (expanded.has(id)) expanded.delete(id);
     else expanded.add(id);
     renderTree();
@@ -240,7 +268,7 @@ function renderTreeNode(id, lineageIds) {
 
   if (hasChildren && isOpen) {
     const ul = document.createElement("ul");
-    childIds.forEach((childId) => ul.append(renderTreeNode(childId, lineageIds)));
+    visibleChildIds.forEach((childId) => ul.append(renderTreeNode(childId, lineageIds)));
     li.append(ul);
   }
   return li;
@@ -405,14 +433,18 @@ function renderAll() {
 els.search.addEventListener("input", renderResults);
 els.clearSearch.addEventListener("click", () => {
   els.search.value = "";
+  clearFocusedTree();
   renderResults();
+  renderTree();
   els.search.focus();
 });
 els.collapseAll.addEventListener("click", () => {
+  clearFocusedTree();
   expanded = new Set(["aves"]);
   renderTree();
 });
 els.expandPath.addEventListener("click", () => {
+  clearFocusedTree();
   expandLineage(selectedId);
   renderTree();
 });
