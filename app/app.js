@@ -221,6 +221,7 @@ function renderTreeNode(id, lineageIds) {
   const focusedChildId = focusedChildByParent.get(id);
   const visibleChildIds = focusedChildId ? childIds.filter((childId) => childId === focusedChildId) : childIds;
   const hasHiddenFocusedSiblings = Boolean(focusedChildId && visibleChildIds.length < childIds.length);
+  const isFocusedPathNode = focusedPathIds.has(id);
   const hasChildren = childIds.length > 0;
   const isOpen = expanded.has(id);
   const li = document.createElement("li");
@@ -248,7 +249,7 @@ function renderTreeNode(id, lineageIds) {
       renderTree();
       return;
     }
-    clearFocusedTree();
+    if (!isFocusedPathNode) clearFocusedTree();
     if (expanded.has(id)) expanded.delete(id);
     else expanded.add(id);
     renderTree();
