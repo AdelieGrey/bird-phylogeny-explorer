@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bird Phylogeny Explorer</title>
     <link rel="icon" type="image/png" href="./assets/wagtail-icon.png?v=2" />
-    <link rel="stylesheet" href="./styles.css?v=94" />
+    <link rel="stylesheet" href="./styles.css?v=117" />
   </head>
   <body>
     <main class="app-shell tree-feather-assets-demo">
@@ -50,12 +50,12 @@
 
       <aside class="detail-panel" aria-label="Taxon details">
         <section class="detail-block primary-detail" id="detail"></section>
-        <section class="detail-block">
+        <section class="detail-block" id="relatedBlock">
           <div class="section-head">
-            <p class="kicker">Lineage Path</p>
-            <h2>系统发育节点</h2>
+            <p class="kicker">Related</p>
+            <h2>相关内容</h2>
           </div>
-          <ol class="lineage-list" id="lineage"></ol>
+          <div class="comparison-list" id="relatedContent"></div>
         </section>
         <section class="detail-block" id="comparisonBlock">
           <div class="section-head">
@@ -63,6 +63,13 @@
             <h2>你也许会联想到……</h2>
           </div>
           <div class="comparison-list" id="comparisons"></div>
+        </section>
+        <section class="detail-block">
+          <div class="section-head">
+            <p class="kicker">Lineage Path</p>
+            <h2>系统发育节点</h2>
+          </div>
+          <ol class="lineage-list" id="lineage"></ol>
         </section>
         <section class="detail-block source-block">
           <div class="section-head">
@@ -74,7 +81,7 @@
       </aside>
     </main>
 
-    <script src="./bird-data.js?v=5"></script>
-    <script src="./app.js?v=10"></script>
+    <script src="./bird-data.js?v=27"></script>
+    <script src="./app.js?v=31"></script>
   </body>
 </html>

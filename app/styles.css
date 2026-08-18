@@ -397,17 +397,67 @@ button:hover {
 }
 
 .tree {
+  position: relative;
   padding: 4px 0 96px;
+}
+
+.tree-lines-svg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.tree-lines-svg line {
+  stroke: var(--line);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+  shape-rendering: crispEdges;
+}
+
+.tree-lines-svg line.lineage-line {
+  stroke: rgba(15, 48, 79, 0.38);
+  stroke-width: 2;
 }
 
 .tree ul {
   list-style: none;
   margin: 0;
-  padding-left: 22px;
+  padding-left: 32px;
+  position: relative;
+}
+
+.tree ul::before {
+  content: "";
+  position: absolute;
+  left: 11px;
+  top: var(--branch-line-top, 18px);
+  bottom: var(--branch-line-bottom, 18px);
+  border-left: 1px solid var(--line);
+}
+
+.tree ul.branch-single::before {
+  display: none;
 }
 
 .tree > ul {
   padding-left: 0;
+}
+
+.tree > ul::before {
+  display: none;
+}
+
+.tree.svg-tree-lines > ul {
+  position: relative;
+  z-index: 1;
+}
+
+.tree.svg-tree-lines ul::before,
+.tree.svg-tree-lines li::before,
+.tree.svg-tree-lines li::after {
+  display: none;
 }
 
 .tree li {
@@ -416,24 +466,34 @@ button:hover {
 }
 
 .tree li::before {
+  display: none;
+}
+
+.tree ul > li:first-child::before {
   content: "";
+  display: block;
   position: absolute;
-  left: -13px;
+  left: -21px;
   top: -4px;
-  bottom: 13px;
+  bottom: calc(100% - 18px);
   border-left: 1px solid var(--line);
 }
 
 .tree li::after {
   content: "";
   position: absolute;
-  left: -13px;
+  left: -21px;
   top: 18px;
-  width: 12px;
+  width: 20px;
   border-top: 1px solid var(--line);
 }
 
 .tree li.lineage-branch::before {
+  display: none;
+}
+
+.tree ul > li.lineage-branch:first-child::before {
+  display: block;
   width: 2px;
   border-left: 0;
   background:
@@ -446,8 +506,75 @@ button:hover {
   border-top-width: 2px;
 }
 
+.tree li.connector-node {
+  --connector-midpoint: 50%;
+  margin: 0;
+  padding-top: 0;
+}
+
+.tree li.connector-node::before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: -21px;
+  top: -4px;
+  height: calc(var(--connector-midpoint) + 4px);
+  bottom: auto;
+  border-left: 1px solid var(--line);
+}
+
+.tree li.connector-node.lineage-branch::before {
+  display: block;
+  width: 2px;
+  border-left: 0;
+  background:
+    linear-gradient(rgba(15, 48, 79, 0.38), rgba(15, 48, 79, 0.38)) left top / 2px 100% no-repeat;
+}
+
+.tree li.connector-node::after {
+  top: var(--connector-midpoint);
+  transform: translateY(-1px);
+  width: 20px;
+}
+
+.tree li.connector-node > ul {
+  position: relative;
+  margin-top: 0;
+}
+
+.tree li.connector-node > ul::before {
+  top: var(--branch-line-top, 18px);
+  bottom: var(--branch-line-bottom, 18px);
+}
+
+.tree li.connector-node.lineage-branch > ul::before {
+  border-left-color: rgba(15, 48, 79, 0.38);
+  border-left-width: 2px;
+}
+
+.tree li.connector-node > ul > li::before {
+  display: none;
+}
+
+.tree.svg-tree-lines li.connector-node::before,
+.tree.svg-tree-lines li.connector-node::after,
+.tree.svg-tree-lines li.connector-node > ul::before {
+  display: none;
+}
+
 .tree > ul > li::before,
 .tree > ul > li::after {
+  display: none;
+}
+
+.tree.svg-tree-lines ul::before,
+.tree.svg-tree-lines li::before,
+.tree.svg-tree-lines li::after,
+.tree.svg-tree-lines ul > li:first-child::before,
+.tree.svg-tree-lines ul > li.lineage-branch:first-child::before,
+.tree.svg-tree-lines li.connector-node::before,
+.tree.svg-tree-lines li.connector-node::after,
+.tree.svg-tree-lines li.connector-node > ul::before {
   display: none;
 }
 
@@ -865,8 +992,9 @@ button:hover {
 
 .citation-note {
   position: absolute;
-  right: 0;
+  left: 50%;
   bottom: calc(100% + 8px);
+  transform: translateX(calc(-50% + var(--citation-shift, 0px)));
   z-index: 20;
   display: none;
   width: min(200px, calc(100vw - 32px));
@@ -884,7 +1012,11 @@ button:hover {
 }
 
 .citation-note-wide {
-  width: min(200px, calc(100vw - 32px));
+  width: min(260px, calc(100vw - 32px));
+}
+
+.related-species-note span {
+  display: block;
 }
 
 .citation-popover:hover .citation-note,
@@ -951,6 +1083,25 @@ button:hover {
   color: #334258;
   font-size: 13px;
   line-height: 1.48;
+}
+
+.inline-taxon-link {
+  display: inline;
+  border: 0;
+  padding: 0;
+  color: #3b6ea5;
+  background: transparent;
+  font: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+.inline-taxon-link:hover,
+.inline-taxon-link:focus-visible {
+  color: #0f304f;
 }
 
 .comparison-card .mini {

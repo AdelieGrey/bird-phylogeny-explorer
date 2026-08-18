@@ -3,6 +3,11 @@ const nodes = data.nodes;
 const nodeById = new Map(nodes.map((node) => [node.id, node]));
 const childrenById = new Map(nodes.map((node) => [node.id, node.childrenIds || []]));
 
+function isConnectorNode(node) {
+  if (!node || node.displayMode === "card") return false;
+  return node.displayMode === "connector" || (node.rank === "clade" && node.scientificName?.includes(" + "));
+}
+
 let selectedId = "aves";
 let expanded = new Set(["aves", "neornithes"]);
 let focusedPathIds = new Set();
@@ -23,6 +28,8 @@ const els = {
   lineage: document.querySelector("#lineage"),
   comparisonBlock: document.querySelector("#comparisonBlock"),
   comparisons: document.querySelector("#comparisons"),
+  relatedBlock: document.querySelector("#relatedBlock"),
+  relatedContent: document.querySelector("#relatedContent"),
   sourceNote: document.querySelector("#sourceNote"),
   collapseAll: document.querySelector("#collapseAll"),
   expandPath: document.querySelector("#expandPath"),
@@ -35,11 +42,23 @@ const rankLabels = {
   clade: "clade",
   order: "order",
   family: "family",
+  subfamily: "subfamily",
+  tribe: "tribe",
+  genus: "genus",
   species: "species",
 };
 
 const stillerCitation =
   "Stiller, J., Feng, S., Chowdhury, AA. et al. Complexity of avian evolution revealed by family-level genomes. Nature 629, 851–860 (2024). https://doi.org/10.1038/s41586-024-07323-1";
+
+const ostrowCitation =
+  'Ostrow, E. N., Catanach, T. A., Bates, J. M., Aleixo, A., & Weckstein, J. D. (2023). Phylogenomic analysis confirms the relationships among toucans, toucan-barbets, and New World barbets but reveals paraphyly of Selenidera toucanets and evidence for mitonuclear discordance. Ornithology, 140(3), 1–13. DOI: <a href="https://doi.org/10.1093/ornithology/ukad022" target="_blank" rel="noreferrer">10.1093/ornithology/ukad022</a>';
+
+const fuchsCitation =
+  'Fuchs, J., Pons, J.-M., & Bowie, R. C. K. (2017). Biogeography and diversification dynamics of the African woodpeckers. Molecular Phylogenetics and Evolution, 108, 88–100. DOI: <a href="https://doi.org/10.1016/j.ympev.2017.01.007" target="_blank" rel="noreferrer">10.1016/j.ympev.2017.01.007</a>';
+
+const shortCitation =
+  'Short, L. L. (1971). The evolution of terrestrial woodpeckers. American Museum of Natural History. <a href="https://www.biodiversitylibrary.org/bibliography/207351" target="_blank" rel="noreferrer">Biodiversity Heritage Library</a>';
 
 const b10kNote =
   "万种鸟类基因组计划（Bird 10,000 Genomes Project，简称 B10K）是一个由全球研究机构和博物馆共同参与的鸟类研究大型国际合作项目。该项目于2015年正式启动，计划通过收集鸟类样本、测序并组装基因组，逐步建立覆盖鸟类各目、科、属乃至所有物种的基因组数据库。截至目前，B10K 已发布数百种鸟类的基因组数据，覆盖绝大多数现生鸟类科，并利用这些数据构建了当前最全面的鸟类科级系统发育树。基于该项目的研究重新梳理了多个长期存在争议的类群关系，为后续的鸟类分类和比较基因组研究提供了基础，补充了鸟类早期快速辐射和主要演化分支的认识。";
@@ -90,7 +109,45 @@ function taxonMeta(node) {
 
 function referenceLink(node) {
   if (!node.referenceLabel || !node.referenceUrl) return "";
-  return `<a href="${node.referenceUrl}" target="_blank" rel="noreferrer">${node.referenceLabel}</a>`;
+  const label = escapeHtml(node.referenceLabel.replace(",", ""));
+  const doi = node.referenceUrl.replace(/^https:\/\/doi\.org\//, "");
+  const citation = node.referenceCitation ? `${escapeHtml(node.referenceCitation)} DOI: ` : "";
+  const note = `${citation}<a href="${node.referenceUrl}" target="_blank" rel="noreferrer">${escapeHtml(doi)}</a>`;
+  return `<span class="citation-popover" tabindex="0"><a href="${node.referenceUrl}" target="_blank" rel="noreferrer">${label}</a><span class="citation-note citation-note-wide" role="note">${note}</span></span>`;
+}
+
+function ostrowCitationLink() {
+  return `<span class="citation-popover" tabindex="0"><a href="https://doi.org/10.1093/ornithology/ukad022" target="_blank" rel="noreferrer">Ostrow et al. 2023</a><span class="citation-note citation-note-wide" role="note">${ostrowCitation}</span></span>`;
+}
+
+function fuchsCitationLink() {
+  return `<span class="citation-popover" tabindex="0"><a href="https://doi.org/10.1016/j.ympev.2017.01.007" target="_blank" rel="noreferrer">Fuchs et al. 2017</a><span class="citation-note citation-note-wide" role="note">${fuchsCitation}</span></span>`;
+}
+
+function shortCitationText(label) {
+  return `<span class="citation-popover" tabindex="0"><a href="https://www.biodiversitylibrary.org/bibliography/207351" target="_blank" rel="noreferrer">${label}</a><span class="citation-note citation-note-wide" role="note">${shortCitation}</span></span>`;
+}
+
+function keepCitationInsidePanel(popover) {
+  const note = popover.querySelector(":scope > .citation-note");
+  if (!note) return;
+  note.style.setProperty("--citation-shift", "0px");
+
+  const previousDisplay = note.style.display;
+  note.style.display = "block";
+  const noteRect = note.getBoundingClientRect();
+  const boundaryRect = popover.closest(".detail-block, .detail-panel")?.getBoundingClientRect() || {
+    left: 16,
+    right: window.innerWidth - 16,
+  };
+  const inset = 12;
+  let shift = 0;
+  const minLeft = boundaryRect.left + inset;
+  const maxRight = boundaryRect.right - inset;
+  if (noteRect.left < minLeft) shift += minLeft - noteRect.left;
+  if (noteRect.right + shift > maxRight) shift -= noteRect.right + shift - maxRight;
+  note.style.setProperty("--citation-shift", `${shift}px`);
+  note.style.display = previousDisplay;
 }
 
 function readableSortBasis(value, node) {
@@ -100,6 +157,8 @@ function readableSortBasis(value, node) {
   if (value === "Manual prototype clade order") {
     return `参照 <span class="citation-popover" tabindex="0"><a href="https://www.nature.com/articles/s41586-024-07323-1" target="_blank" rel="noreferrer">Stiller et al. (2024)</a><span class="citation-note" role="note">${stillerCitation}</span></span> 中系统发育树排序`;
   }
+  if (value === "Ostrow et al. 2023") return ostrowCitationLink();
+  if (value === "Fuchs et al. 2017") return fuchsCitationLink();
   if (value === "AviList Sequence") return "按 AviList 目级顺序排列";
   if (value === "AviList Sequence family row") return "按 AviList 科级顺序排列";
   if (value === "AviList Sequence genus row") return "按 AviList 属级顺序排列";
@@ -111,6 +170,8 @@ function readableSource(value, node = {}) {
   const nodeReference = referenceLink(node);
   if (nodeReference) return nodeReference;
   if (!value || value === "Prototype data") return "本地整理资料";
+  if (value === "Ostrow et al. 2023") return ostrowCitationLink();
+  if (value === "Fuchs et al. 2017") return fuchsCitationLink();
   if (value === "Manual prototype phylogeny layer") {
     return `万种鸟类基因组计划 Bird 10,000 Genomes Project - <span class="citation-popover" tabindex="0"><a href="https://b10k.genomics.cn" target="_blank" rel="noreferrer">B10K</a><span class="citation-note citation-note-wide" role="note">${b10kNote}</span></span>`;
   }
@@ -121,7 +182,7 @@ function readableSource(value, node = {}) {
     return "AviList v2025b；中文科名优先参考中国观鸟年报名录";
   }
   if (value === "AviList v2025b genus record; Chinese genus name from local override when matched") {
-    return "AviList v2025b；中文属名来自本地校订表";
+    return node.chineseName ? "AviList v2025b；中文属名来自本地校订表" : "AviList v2025b";
   }
   if (value === "AviList v2025b species record; Chinese name from birdMapV2.js when matched") {
     return "AviList v2025b；中文种名参照郑光美《中国鸟类分类与物种名录》第四版";
@@ -160,6 +221,11 @@ function expandLineage(id) {
   for (const node of lineageOf(id)) expanded.add(node.id);
 }
 
+function expandLineageParents(id) {
+  const path = lineageOf(id);
+  expanded = new Set(path.slice(0, -1).map((node) => node.id));
+}
+
 function clearFocusedTree() {
   focusedPathIds = new Set();
   focusedChildByParent = new Map();
@@ -190,10 +256,14 @@ function showFocusedSiblingsAt(id) {
 function selectNode(id, scroll = false, options = {}) {
   if (id !== selectedId) pathOnlyRevealedIds = new Set();
   selectedId = id;
-  expandLineage(id);
-  if (pathOnly) applyPathOnlyFocus(id);
-  else if (options.focusLineage) focusTreeOnLineage(id);
-  else clearFocusedTree();
+  if (pathOnly) {
+    expandLineageParents(id);
+    applyPathOnlyFocus(id);
+  } else {
+    expandLineage(id);
+    if (options.focusLineage) focusTreeOnLineage(id);
+    else clearFocusedTree();
+  }
   renderAll();
   if (scroll) {
     const row = document.querySelector(`[data-node-id="${id}"]`);
@@ -202,14 +272,15 @@ function selectNode(id, scroll = false, options = {}) {
 }
 
 function rankScore(rank) {
-  return { class: 0, clade: 1, order: 2, family: 3, species: 4 }[rank] ?? 9;
+  return { class: 0, subclass: 1, clade: 2, order: 3, family: 4, subfamily: 5, tribe: 6, genus: 7, species: 8 }[rank] ?? 9;
 }
 
 function searchNodes(query) {
   const q = query.trim().toLowerCase();
-  if (!q) return nodes.filter((node) => ["clade", "order"].includes(node.rank)).slice(0, 24);
+  const searchableNodes = nodes.filter((node) => !isConnectorNode(node));
+  if (!q) return searchableNodes.filter((node) => ["clade", "order"].includes(node.rank)).slice(0, 24);
   const parts = q.split(/\s+/).filter(Boolean);
-  return nodes
+  return searchableNodes
     .map((node) => {
       const haystack = searchableText(node);
       const matched = parts.every((part) => haystack.includes(part));
@@ -254,7 +325,21 @@ function renderTreeNode(id, lineageIds) {
   const hasChildren = childIds.length > 0;
   const isOpen = expanded.has(id);
   const li = document.createElement("li");
-  li.className = lineageIds.has(id) ? "lineage-branch" : "";
+  li.className = [
+    lineageIds.has(id) ? "lineage-branch" : "",
+    isConnectorNode(node) ? "connector-node" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  if (isConnectorNode(node)) {
+    if (hasChildren) {
+      const ul = document.createElement("ul");
+      visibleChildIds.forEach((childId) => ul.append(renderTreeNode(childId, lineageIds)));
+      li.append(ul);
+    }
+    return li;
+  }
 
   const row = document.createElement("div");
   const featherColors = ["green", "yellow", "red", "brown"];
@@ -323,13 +408,96 @@ function renderTreeNode(id, lineageIds) {
 function renderTree() {
   const lineageIds = new Set(lineageOf(selectedId).map((node) => node.id));
   const root = document.createElement("ul");
+  const lines = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  lines.classList.add("tree-lines-svg");
+  lines.setAttribute("aria-hidden", "true");
   treeFeatherIndex = 0;
   if (pathOnly) applyPathOnlyFocus(selectedId);
   root.append(renderTreeNode("aves", lineageIds));
-  els.tree.replaceChildren(root);
+  els.tree.classList.add("svg-tree-lines");
+  els.tree.replaceChildren(lines, root);
+  drawTreeBranches(lines);
   els.pathOnly.classList.toggle("active", pathOnly);
   els.pathOnly.setAttribute("aria-pressed", String(pathOnly));
   els.pathOnly.textContent = pathOnly ? "显示全部" : "仅路径";
+}
+
+function makeTreeLine(svg, x1, y1, x2, y2, className = "") {
+  const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+  line.setAttribute("x1", x1.toFixed(1));
+  line.setAttribute("y1", y1.toFixed(1));
+  line.setAttribute("x2", x2.toFixed(1));
+  line.setAttribute("y2", y2.toFixed(1));
+  if (className) line.classList.add(className);
+  svg.append(line);
+}
+
+function drawTreeBranches(svg) {
+  const treeRect = els.tree.getBoundingClientRect();
+  const connectorYCache = new Map();
+
+  function branchY(li) {
+    if (li.classList.contains("connector-node")) return connectorY(li);
+    return li.getBoundingClientRect().top - treeRect.top + 18;
+  }
+
+  function connectorY(li) {
+    if (connectorYCache.has(li)) return connectorYCache.get(li);
+    const ul = li.querySelector(":scope > ul");
+    if (!ul || ul.children.length === 0) {
+      const rect = li.getBoundingClientRect();
+      const fallback = rect.top - treeRect.top + rect.height / 2;
+      connectorYCache.set(li, fallback);
+      return fallback;
+    }
+    const children = Array.from(ul.children);
+    const firstY = branchY(children[0]);
+    const lastY = branchY(children[children.length - 1]);
+    const midpoint = (firstY + lastY) / 2;
+    li.style.setProperty("--connector-midpoint", `${midpoint - (li.getBoundingClientRect().top - treeRect.top)}px`);
+    connectorYCache.set(li, midpoint);
+    return midpoint;
+  }
+
+  function listBranchX(ul) {
+    return ul.getBoundingClientRect().left - treeRect.left + 11;
+  }
+
+  function childTargetX(li) {
+    if (li.classList.contains("connector-node")) {
+      const ul = li.querySelector(":scope > ul");
+      if (ul) return listBranchX(ul);
+    }
+    return li.getBoundingClientRect().left - treeRect.left - 1;
+  }
+
+  const lists = Array.from(els.tree.querySelectorAll("ul"));
+  const rootList = els.tree.querySelector(":scope > ul");
+  lists.forEach((ul) => {
+    if (!ul || ul === rootList || ul.children.length === 0) return;
+
+    const children = Array.from(ul.children);
+    const x = listBranchX(ul);
+    const yValues = children.map(branchY);
+    const parentLi = ul.parentElement?.tagName === "LI" ? ul.parentElement : null;
+    if (parentLi) yValues.push(parentLi.classList.contains("connector-node") ? connectorY(parentLi) : branchY(parentLi) + 22);
+    const y1 = Math.min(...yValues);
+    const y2 = Math.max(...yValues);
+    if (Math.abs(y2 - y1) > 0.5) makeTreeLine(svg, x, y1, x, y2);
+
+    children.forEach((li) => {
+      const y = branchY(li);
+      const targetX = childTargetX(li);
+      if (Math.abs(targetX - x) > 0.5) {
+        makeTreeLine(svg, x, y, targetX, y, li.classList.contains("lineage-branch") ? "lineage-line" : "");
+      }
+    });
+  });
+  const height = els.tree.scrollHeight;
+  const width = els.tree.scrollWidth;
+  svg.setAttribute("viewBox", `0 0 ${Math.ceil(width)} ${Math.ceil(height)}`);
+  svg.setAttribute("width", Math.ceil(width));
+  svg.setAttribute("height", Math.ceil(height));
 }
 
 function renderDetail() {
@@ -407,7 +575,7 @@ function renderDetail() {
 }
 
 function renderLineage() {
-  const path = lineageOf(selectedId);
+  const path = lineageOf(selectedId).filter((node) => !isConnectorNode(node));
   els.lineage.replaceChildren(
     ...path.map((node) => {
       const li = document.createElement("li");
@@ -441,6 +609,52 @@ function renderComparisons() {
       return div;
     }),
   );
+}
+
+function renderRelatedSummary(card) {
+  let summary = escapeHtml(card.summary || "");
+  if (card.citation === "Short 1971") {
+    summary = summary.replace("地栖化", shortCitationText("地栖化"));
+  }
+  for (const link of card.links || []) {
+    if (!nodeById.has(link.targetId)) continue;
+    const label = escapeHtml(link.label);
+    const target = escapeHtml(link.targetId);
+    const button = `<button class="inline-taxon-link" type="button" data-related-target="${target}">${label}</button>`;
+    const noteHtml = link.noteSpecies
+      ? link.noteSpecies
+          .map((species) => `<span><em>${escapeHtml(species.scientificName)}</em> ${escapeHtml(species.chineseName)}</span>`)
+          .join("")
+      : escapeHtml(link.note || "");
+    const internalLink = noteHtml
+      ? `<span class="citation-popover" tabindex="0">${button}<span class="citation-note citation-note-wide related-species-note" role="note">${noteHtml}</span></span>`
+      : button;
+    summary = summary.replaceAll(label, internalLink);
+  }
+  return summary;
+}
+
+function renderRelatedContent() {
+  const selectedPath = new Set(lineageOf(selectedId).map((node) => node.id));
+  const relevant = (data.relatedContent || []).filter((card) => {
+    const contextIds = card.contextIds || [];
+    return contextIds.includes(selectedId) || contextIds.some((id) => selectedPath.has(id));
+  });
+  els.relatedBlock.hidden = relevant.length === 0;
+  els.relatedContent.replaceChildren(
+    ...relevant.map((card) => {
+      const div = document.createElement("article");
+      div.className = "comparison-card";
+      div.innerHTML = `
+        <h3>${escapeHtml(card.title)}</h3>
+        <p>${renderRelatedSummary(card)}</p>
+      `;
+      return div;
+    }),
+  );
+  els.relatedContent.querySelectorAll("[data-related-target]").forEach((button) => {
+    button.addEventListener("click", () => selectNode(button.dataset.relatedTarget, true));
+  });
 }
 
 function renderQuickList() {
@@ -478,6 +692,7 @@ function renderAll() {
   renderDetail();
   renderLineage();
   renderComparisons();
+  renderRelatedContent();
   renderSourceNote();
 }
 
@@ -502,12 +717,23 @@ els.expandPath.addEventListener("click", () => {
 els.pathOnly.addEventListener("click", () => {
   pathOnly = !pathOnly;
   if (pathOnly) {
-    expandLineage(selectedId);
+    expandLineageParents(selectedId);
     focusTreeOnLineage(selectedId);
   } else {
     clearFocusedTree();
   }
   renderTree();
+});
+
+document.addEventListener("pointerover", (event) => {
+  const popover = event.target.closest?.(".citation-popover");
+  if (!popover || popover.contains(event.relatedTarget)) return;
+  keepCitationInsidePanel(popover);
+});
+
+document.addEventListener("focusin", (event) => {
+  const popover = event.target.closest?.(".citation-popover");
+  if (popover) keepCitationInsidePanel(popover);
 });
 
 renderQuickList();
