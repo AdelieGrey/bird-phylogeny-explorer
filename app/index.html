@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bird Phylogeny Explorer</title>
     <link rel="icon" type="image/png" href="./assets/wagtail-icon.png?v=2" />
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./styles.css?v=94" />
   </head>
   <body>
-    <main class="app-shell">
+    <main class="app-shell tree-feather-assets-demo">
       <aside class="search-panel" aria-label="Search panel">
         <div class="brand">
           <img class="brand-logo" src="./assets/wagtail-logo.png?v=2" alt="白鹡鸰图标" />
@@ -42,6 +42,7 @@
           <div class="tool-buttons">
             <button id="collapseAll" type="button" title="Collapse all">折叠</button>
             <button id="expandPath" type="button" title="Expand selected lineage">展开路径</button>
+            <button id="pathOnly" type="button" title="只显示当前谱系路径" aria-pressed="false">仅路径</button>
           </div>
         </div>
         <div class="tree" id="tree"></div>
@@ -73,7 +74,7 @@
       </aside>
     </main>
 
-    <script src="./bird-data.js"></script>
-    <script src="./app.js"></script>
+    <script src="./bird-data.js?v=5"></script>
+    <script src="./app.js?v=10"></script>
   </body>
 </html>

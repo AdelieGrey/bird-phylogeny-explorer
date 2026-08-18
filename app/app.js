@@ -7,6 +7,9 @@ let selectedId = "aves";
 let expanded = new Set(["aves", "neornithes"]);
 let focusedPathIds = new Set();
 let focusedChildByParent = new Map();
+let pathOnlyRevealedIds = new Set();
+let treeFeatherIndex = 0;
+let pathOnly = false;
 
 const els = {
   search: document.querySelector("#searchInput"),
@@ -23,6 +26,7 @@ const els = {
   sourceNote: document.querySelector("#sourceNote"),
   collapseAll: document.querySelector("#collapseAll"),
   expandPath: document.querySelector("#expandPath"),
+  pathOnly: document.querySelector("#pathOnly"),
 };
 
 const rankLabels = {
@@ -68,6 +72,20 @@ function subtitle(node) {
   if (node.rank === "species") return node.englishName;
   if (node.englishName && node.englishName !== node.scientificName) return node.englishName;
   return node.rank;
+}
+
+function englishMetaName(node) {
+  const value = node.englishName?.trim();
+  if (!value || value === node.scientificName) return "";
+  const normalized = value.toLowerCase();
+  const rank = node.rank?.toLowerCase();
+  const rankLabel = (rankLabels[node.rank] || node.rank || "").toLowerCase();
+  if (normalized === rank || normalized === rankLabel) return "";
+  return value;
+}
+
+function taxonMeta(node) {
+  return [rankLabels[node.rank] || node.rank, englishMetaName(node)].filter(Boolean).join(" · ");
 }
 
 function referenceLink(node) {
@@ -145,6 +163,7 @@ function expandLineage(id) {
 function clearFocusedTree() {
   focusedPathIds = new Set();
   focusedChildByParent = new Map();
+  pathOnlyRevealedIds = new Set();
 }
 
 function focusTreeOnLineage(id) {
@@ -156,14 +175,24 @@ function focusTreeOnLineage(id) {
   }
 }
 
+function applyPathOnlyFocus(id) {
+  focusTreeOnLineage(id);
+  for (const revealedId of pathOnlyRevealedIds) {
+    if (focusedPathIds.has(revealedId)) focusedChildByParent.delete(revealedId);
+  }
+}
+
 function showFocusedSiblingsAt(id) {
+  if (pathOnly) pathOnlyRevealedIds.add(id);
   focusedChildByParent.delete(id);
 }
 
 function selectNode(id, scroll = false, options = {}) {
+  if (id !== selectedId) pathOnlyRevealedIds = new Set();
   selectedId = id;
   expandLineage(id);
-  if (options.focusLineage) focusTreeOnLineage(id);
+  if (pathOnly) applyPathOnlyFocus(id);
+  else if (options.focusLineage) focusTreeOnLineage(id);
   else clearFocusedTree();
   renderAll();
   if (scroll) {
@@ -207,7 +236,7 @@ function renderResults() {
       button.className = `result-item ${node.id === selectedId ? "active" : ""}`;
       button.innerHTML = `
         <span class="result-name">${displayNameHtml(node)}</span>
-        <span class="result-meta">${rankLabels[node.rank]} · ${subtitle(node)}</span>
+        <span class="result-meta">${taxonMeta(node)}</span>
       `;
       button.addEventListener("click", () => selectNode(node.id, true, { focusLineage: node.rank === "species" }));
       return button;
@@ -225,22 +254,26 @@ function renderTreeNode(id, lineageIds) {
   const hasChildren = childIds.length > 0;
   const isOpen = expanded.has(id);
   const li = document.createElement("li");
+  li.className = lineageIds.has(id) ? "lineage-branch" : "";
 
   const row = document.createElement("div");
+  const featherColors = ["green", "yellow", "red", "brown"];
   row.className = [
     "node-row",
+    `feather-${featherColors[treeFeatherIndex % featherColors.length]}`,
     id === selectedId ? "selected" : "",
     lineageIds.has(id) ? "in-lineage" : "",
   ]
     .filter(Boolean)
     .join(" ");
+  treeFeatherIndex += 1;
   row.dataset.nodeId = id;
 
   const twisty = document.createElement("button");
   twisty.type = "button";
   twisty.className = `twisty ${hasChildren ? "" : "empty"}`;
   twisty.textContent = isOpen ? "−" : "+";
-  twisty.title = hasHiddenFocusedSiblings ? "Show sibling branches" : isOpen ? "Collapse" : "Expand";
+  twisty.title = hasHiddenFocusedSiblings ? "显示该分类单元下的分支" : isOpen ? "收起" : "展开";
   twisty.addEventListener("click", (event) => {
     event.stopPropagation();
     if (hasHiddenFocusedSiblings) {
@@ -249,7 +282,7 @@ function renderTreeNode(id, lineageIds) {
       renderTree();
       return;
     }
-    if (!isFocusedPathNode) clearFocusedTree();
+    if (!pathOnly && !isFocusedPathNode) clearFocusedTree();
     if (expanded.has(id)) expanded.delete(id);
     else expanded.add(id);
     renderTree();
@@ -260,7 +293,7 @@ function renderTreeNode(id, lineageIds) {
   main.className = "node-main";
   main.innerHTML = `
     <span class="node-name">${displayNameHtml(node)}</span>
-    <span class="node-sub">${subtitle(node)}</span>
+    <span class="node-sub">${taxonMeta(node)}</span>
   `;
   main.addEventListener("click", () => selectNode(id));
 
@@ -268,7 +301,15 @@ function renderTreeNode(id, lineageIds) {
   rank.className = "rank-pill";
   rank.textContent = rankLabels[node.rank] || node.rank;
 
-  row.append(twisty, main, rank);
+  const featherShadow = document.createElement("span");
+  featherShadow.className = "feather-shadow";
+  featherShadow.setAttribute("aria-hidden", "true");
+
+  const featherFill = document.createElement("span");
+  featherFill.className = "feather-fill";
+  featherFill.setAttribute("aria-hidden", "true");
+
+  row.append(featherShadow, featherFill, twisty, main, rank);
   li.append(row);
 
   if (hasChildren && isOpen) {
@@ -282,8 +323,13 @@ function renderTreeNode(id, lineageIds) {
 function renderTree() {
   const lineageIds = new Set(lineageOf(selectedId).map((node) => node.id));
   const root = document.createElement("ul");
+  treeFeatherIndex = 0;
+  if (pathOnly) applyPathOnlyFocus(selectedId);
   root.append(renderTreeNode("aves", lineageIds));
   els.tree.replaceChildren(root);
+  els.pathOnly.classList.toggle("active", pathOnly);
+  els.pathOnly.setAttribute("aria-pressed", String(pathOnly));
+  els.pathOnly.textContent = pathOnly ? "显示全部" : "仅路径";
 }
 
 function renderDetail() {
@@ -451,6 +497,16 @@ els.collapseAll.addEventListener("click", () => {
 els.expandPath.addEventListener("click", () => {
   clearFocusedTree();
   expandLineage(selectedId);
+  renderTree();
+});
+els.pathOnly.addEventListener("click", () => {
+  pathOnly = !pathOnly;
+  if (pathOnly) {
+    expandLineage(selectedId);
+    focusTreeOnLineage(selectedId);
+  } else {
+    clearFocusedTree();
+  }
   renderTree();
 });
 

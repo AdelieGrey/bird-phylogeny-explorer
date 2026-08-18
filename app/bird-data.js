@@ -1227,7 +1227,7 @@ window.BIRD_DATA = {
       "rank": "order",
       "scientificName": "Galbuliformes",
       "englishName": "Galbuliformes",
-      "chineseName": "鴷形目",
+      "chineseName": "鹟䴕目",
       "parentId": "afroaves",
       "summary": "",
       "traits": [],
@@ -379865,15 +379865,15 @@ window.BIRD_DATA = {
   ],
   "quickStarts": [
     "美洲夜鹰",
-    "红喉北蜂鸟",
-    "游隼",
-    "白头海雕",
-    "家燕",
-    "紫色花蜜鸟",
-    "帝企鹅",
-    "北极海鹦",
     "Strisores",
+    "红喉北蜂鸟",
+    "家燕",
     "Galloanserae",
-    "Passeriformes"
+    "游隼",
+    "紫色花蜜鸟",
+    "Passeriformes",
+    "白头海雕",
+    "帝企鹅",
+    "北极海鹦"
   ]
 };
