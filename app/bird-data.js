@@ -380285,13 +380285,13 @@ window.BIRD_DATA = {
   "quickStarts": [
     "Piciformes",
     "Strisores",
+    "美洲夜鹰",
     "红喉北蜂鸟",
     "家燕",
     "地啄木鸟",
+    "Galloanserae",
     "游隼",
-    "紫色花蜜鸟",
     "Passeriformes",
-    "白头海雕",
     "帝企鹅",
     "北极海鹦"
   ]
