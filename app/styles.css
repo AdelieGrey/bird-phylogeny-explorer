@@ -1195,15 +1195,19 @@ button:hover {
   }
 
   .tree {
-    min-width: 1040px;
-    width: 1040px;
+    width: clamp(760px, 190vw, 880px);
+    min-width: 760px;
     padding-right: 28px;
   }
 
+  .tree ul {
+    padding-left: 22px;
+  }
+
   .tree-feather-assets-demo .node-row {
-    width: 620px;
-    min-width: 620px;
-    grid-template-columns: 24px minmax(320px, 1fr) max-content;
+    width: clamp(390px, calc(100vw + 56px), 480px);
+    min-width: 390px;
+    grid-template-columns: 24px minmax(180px, 1fr) max-content;
   }
 
   .tool-buttons {
