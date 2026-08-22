@@ -1185,8 +1185,23 @@ button:hover {
     border: 0;
   }
 
+  .tree-panel {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
   .toolbar {
     position: static;
+  }
+
+  .tree {
+    min-width: 680px;
+    width: max-content;
+    padding-right: 28px;
+  }
+
+  .tree-feather-assets-demo .node-row {
+    min-width: 520px;
   }
 
   .tool-buttons {
