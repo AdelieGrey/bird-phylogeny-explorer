@@ -1197,9 +1197,9 @@ button:hover {
   }
 
   .tree {
-    width: clamp(560px, 142vw, 680px);
-    min-width: 560px;
-    padding-right: 18px;
+    width: clamp(390px, 104vw, 480px);
+    min-width: 390px;
+    padding-right: 12px;
   }
 
   .tree ul {
@@ -1210,10 +1210,10 @@ button:hover {
     --tree-feather-fill-x: 30px;
     --tree-feather-fill-width: calc(100% - 64px);
     --tree-feather-shaft-y: calc(50% + 13px);
-    width: clamp(300px, calc(100vw - 18px), 370px);
-    min-width: 300px;
+    width: clamp(180px, 54vw, 240px);
+    min-width: 180px;
     min-height: 36px;
-    grid-template-columns: 20px minmax(120px, 1fr) max-content;
+    grid-template-columns: 20px minmax(54px, 1fr) max-content;
     gap: 6px;
     margin-left: 14px;
     margin-right: 4px;
