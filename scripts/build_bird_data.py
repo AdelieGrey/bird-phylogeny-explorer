@@ -1175,17 +1175,17 @@ def main():
         "nodes": nodes,
         "comparisons": COMPARISONS,
         "quickStarts": [
-            "美洲夜鹰",
+            "Piciformes",
+            "Strisores",
             "红喉北蜂鸟",
-            "游隼",
-            "白头海雕",
             "家燕",
+            "地啄木鸟",
+            "游隼",
             "紫色花蜜鸟",
+            "Passeriformes",
+            "白头海雕",
             "帝企鹅",
             "北极海鹦",
-            "Strisores",
-            "Galloanserae",
-            "Passeriformes",
         ],
     }
 
